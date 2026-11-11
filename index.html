@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="НОЯБРЬ 2026 — 3D-хоррор в стиле VHS про деревню Новинка, где пропадают люди. Для Windows и Android.">
+<meta property="og:title" content="НОЯБРЬ 2026">
+<meta property="og:description" content="3D-хоррор в стиле старой кассеты про деревню Новинка и белого медведя.">
+<meta property="og:image" content="img/hero_bear.jpg">
+<link rel="icon" href="img/hero_icon.jpg">
+<title>НОЯБРЬ 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Rubik:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+body{margin:0}[hidden]{display:none!important}
+/* Сайт как VHS-кассета: чёрный эфир, красная плёнка, моно-тайм-коды; полосы помех поверх всего. Одна тёмная тема, как в игре. */
+:root {
+  --bg: #070506; --bg2: #0f0b0c; --panel: #151012; --line: #2a1e20;
+  --fg: #efe6e2; --muted: #9a8c88; --red: #e0262b; --red-dk: #7d1316; --amber: #ffb547;
+  --display: "Rubik Glitch", "Rubik", Impact, system-ui, sans-serif;
+  --head: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
+a { color: inherit; }
+img { display: block; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* помехи поверх всего сайта */
+.scan { pointer-events: none; position: fixed; inset: 0; z-index: 50; background: repeating-linear-gradient(to bottom, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); mix-blend-mode: overlay; }
+#noise { pointer-events: none; position: fixed; inset: 0; z-index: 49; width: 100%; height: 100%; opacity: .07; }
+.tracking { pointer-events: none; position: fixed; left: 0; right: 0; height: 26px; z-index: 51; background: linear-gradient(to bottom, transparent, rgba(255,255,255,.07), transparent); top: -40px; animation: track 9s linear infinite; }
+@keyframes track { 0% { top: -40px; } 70% { top: -40px; } 100% { top: 110%; } }
+@media (prefers-reduced-motion: reduce) { .tracking { display: none; } }
+
+/* шапка */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: rgba(7,5,6,.86); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; gap: 18px; height: 58px; }
+.logo { font-family: var(--display); color: var(--red); font-size: 22px; text-decoration: none; white-space: nowrap; letter-spacing: .02em; }
+.links { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; }
+.links::-webkit-scrollbar { display: none; }
+.links a { font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); text-decoration: none; padding: 8px 10px; border-radius: 4px; white-space: nowrap; }
+.links a:hover, .links a:focus-visible { color: var(--fg); background: var(--panel); outline: none; }
+.nav .dl { font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; background: var(--red); color: #fff; text-decoration: none; padding: 9px 14px; border-radius: 4px; white-space: nowrap; }
+@media (max-width: 720px) { .nav .dl { display: none; } }
+
+/* герой: слайды меняются каждые 5 секунд */
+.hero { position: relative; height: min(92vh, 860px); min-height: 520px; overflow: hidden; background: #000; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.1s ease; }
+.slide.on { opacity: 1; }
+.slide img, .slide video { width: 100%; height: 100%; object-fit: cover; }
+.slide.on img, .slide.on video { animation: kb 6s ease-out forwards; }
+@keyframes kb { from { transform: scale(1.06); } to { transform: scale(1); } }
+.hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(0,0,0,.75) 100%), linear-gradient(to bottom, rgba(0,0,0,.35), transparent 30%, transparent 55%, rgba(7,5,6,1)); pointer-events: none; }
+.osd { position: absolute; z-index: 3; font-family: var(--mono); font-size: clamp(13px, 1.6vw, 18px); text-shadow: 0 0 6px rgba(0,0,0,.9); letter-spacing: .06em; }
+.osd.tl { top: 20px; left: max(20px, env(safe-area-inset-left, 0px)); color: var(--red); display: flex; align-items: center; gap: 8px; }
+.osd.tl i { width: 12px; height: 12px; border-radius: 50%; background: var(--red); animation: blink 1.2s steps(2) infinite; }
+.osd.tr { top: 20px; right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; }
+.osd.bl { bottom: 24px; left: max(20px, env(safe-area-inset-left, 0px)); color: #fff; }
+.osd.br { bottom: 24px; right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; text-align: right; }
+@keyframes blink { 50% { opacity: .15; } }
+.hero-c { position: absolute; z-index: 4; left: 0; right: 0; bottom: 14%; text-align: center; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.title { font-family: var(--display); font-size: clamp(54px, 11vw, 150px); line-height: .9; color: var(--fg); margin: 0; text-shadow: 3px 0 var(--red), -3px 0 rgba(0,180,255,.45), 0 0 40px rgba(224,38,43,.4); }
+.tag { font-family: var(--mono); color: #e8dcd6; margin: 18px auto 0; max-width: 46ch; font-size: clamp(14px, 1.7vw, 18px); text-wrap: balance; }
+.cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+.btn { font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em; font-size: 14px; text-decoration: none; padding: 14px 22px; border-radius: 4px; border: 1px solid var(--red); display: inline-flex; gap: 10px; align-items: center; transition: transform .15s, box-shadow .15s; cursor: pointer; background: transparent; color: var(--fg); }
+.btn.solid { background: var(--red); color: #fff; }
+.btn:hover, .btn:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(224,38,43,.35); outline: none; }
+.dots { position: absolute; z-index: 5; bottom: 70px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+.dots button { width: 34px; height: 4px; border: 0; padding: 0; background: rgba(255,255,255,.3); cursor: pointer; border-radius: 2px; }
+.dots button.on { background: var(--red); }
+@media (max-width: 560px) { .dots { bottom: 58px; } .hero-c { bottom: 18%; } }
+
+/* общие секции */
+section { padding-block: 92px; border-top: 1px solid var(--line); position: relative; }
+.eyebrow { font-family: var(--mono); color: var(--red); text-transform: uppercase; letter-spacing: .14em; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+.eyebrow::before { content: "▶"; font-size: 10px; }
+h2 { font-family: var(--head); font-weight: 900; font-size: clamp(32px, 5vw, 56px); line-height: 1.02; margin: 12px 0 18px; text-wrap: balance; letter-spacing: -.01em; }
+h2 em { font-style: normal; color: var(--red); }
+.lead { color: #cfc3be; max-width: 62ch; font-size: 18px; margin: 0 0 40px; }
+h3 { font-family: var(--head); font-weight: 700; font-size: 20px; margin: 0 0 6px; }
+.muted { color: var(--muted); }
+
+/* об игре */
+.about { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
+.about > * { min-width: 0; }
+.case { background: #e9dfc9; color: #2a2220; border-radius: 4px; padding: 26px 26px 22px; font-family: var(--mono); font-size: 14px; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,.6); transform: rotate(-1.2deg); }
+.case b { display: block; font-size: 18px; letter-spacing: .06em; }
+.case .stamp { position: absolute; right: 18px; top: 18px; border: 3px solid var(--red-dk); color: var(--red-dk); padding: 4px 10px; transform: rotate(8deg); font-weight: 600; letter-spacing: .1em; }
+.case .ph { display: grid; grid-template-columns: 110px 1fr; gap: 16px; margin-top: 14px; align-items: start; }
+.case .ph img { width: 110px; height: 140px; object-fit: cover; object-position: top; filter: sepia(.6) contrast(1.05); border: 4px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+.case dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+.case dt { color: #6f5f58; } .case dd { margin: 0; }
+.feat { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 56px; }
+.feat div { background: var(--bg2); padding: 22px; }
+.feat p { margin: 0; color: var(--muted); font-size: 15px; }
+.feat .k { font-family: var(--mono); color: var(--red); font-size: 12px; letter-spacing: .1em; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } .feat { grid-template-columns: 1fr; } }
+
+/* герои */
+.cast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.who { position: relative; background: linear-gradient(to bottom, #1a1113, #0b0809); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: 300px auto; transition: border-color .2s, transform .2s; }
+.who:hover { border-color: var(--red); transform: translateY(-3px); }
+.who .pic { position: relative; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; background: radial-gradient(ellipse at 50% 90%, rgba(224,38,43,.18), transparent 65%); }
+.who .pic img { max-height: 290px; width: auto; filter: drop-shadow(0 10px 18px rgba(0,0,0,.7)); }
+.who .pic.wide img { max-height: none; width: 92%; margin-bottom: 18px; }
+.who .txt { padding: 16px 18px 20px; border-top: 1px solid var(--line); }
+.who .role { font-family: var(--mono); font-size: 12px; color: var(--red); letter-spacing: .1em; text-transform: uppercase; }
+.who p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+.who.bear .pic { background: radial-gradient(ellipse at 50% 80%, rgba(255,255,255,.12), transparent 60%), #050405; }
+@media (max-width: 900px) { .cast { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .cast { grid-template-columns: 1fr; } }
+
+/* кадры */
+.gal { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 10px; }
+.gal button { padding: 0; border: 0; cursor: zoom-in; overflow: hidden; border-radius: 4px; background: #000; position: relative; }
+.gal button img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, filter .4s; filter: saturate(.85); }
+.gal button:hover img, .gal button:focus-visible img { transform: scale(1.06); filter: saturate(1.1); }
+.gal button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.gal button span { position: absolute; left: 8px; bottom: 8px; font-family: var(--mono); font-size: 11px; background: rgba(0,0,0,.7); padding: 3px 7px; border-radius: 3px; letter-spacing: .06em; }
+.gal .big { grid-column: span 2; grid-row: span 2; }
+@media (max-width: 860px) { .gal { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; } }
+.lb { position: fixed; inset: 0; z-index: 70; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+.lb[hidden] { display: none; }
+.lb img { max-width: 100%; max-height: 86vh; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); }
+.lb button { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); }
+
+/* видео */
+.vids { display: grid; grid-template-columns: repeat(2, minmax(0, 340px)); gap: 28px; justify-content: start; }
+.vid { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.vid video { width: 100%; aspect-ratio: 9 / 16; border-radius: 4px; background: #000; display: block; }
+.vid h3 { font-size: 16px; margin: 12px 4px 2px; }
+.vid p { margin: 0 4px 4px; font-size: 14px; }
+@media (max-width: 640px) { .vids { grid-template-columns: 1fr; } }
+
+/* карта */
+.map { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.map img { width: 100%; height: auto; }
+.pins { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pins span { font-family: var(--mono); font-size: 12.5px; border: 1px solid var(--line); padding: 6px 10px; border-radius: 3px; color: #d8ccc6; }
+
+/* скачать */
+.dlg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card .plat { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.card h3 { font-size: 21px; }
+.card p { margin: 0; color: var(--muted); font-size: 14.5px; flex: 1; }
+.soon { font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; padding: 12px; border-radius: 4px; border: 1px dashed var(--red); color: var(--red); text-align: center; background: rgba(224,38,43,.06); }
+.card.main { border-color: var(--red); background: linear-gradient(160deg, #24120f, var(--panel) 60%); }
+@media (max-width: 960px) { .dlg { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .dlg { grid-template-columns: 1fr; } }
+.req { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+.req > div { border: 1px solid var(--line); border-radius: 6px; padding: 22px; min-width: 0; }
+.req table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.req td { padding: 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.req td:first-child { color: var(--muted); width: 42%; font-family: var(--mono); font-size: 13px; padding-right: 10px; }
+.req tr:last-child td { border-bottom: 0; }
+@media (max-width: 720px) { .req { grid-template-columns: 1fr; } }
+
+/* DLC */
+.dlc { display: grid; grid-template-columns: 1.2fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.dlc > * { min-width: 0; }
+.dlc .im { position: relative; min-height: 320px; }
+.dlc .im img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.5) contrast(1.1) brightness(.75); }
+.dlc .im::after { content: "СЕКРЕТНО"; position: absolute; left: 24px; top: 24px; font-family: var(--mono); font-weight: 600; letter-spacing: .2em; color: var(--red); border: 3px solid var(--red); padding: 6px 12px; transform: rotate(-6deg); background: rgba(0,0,0,.35); }
+.dlc .tx { padding: 34px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.dlc .yr { font-family: var(--display); font-size: 64px; color: var(--red); line-height: 1; }
+.pill { align-self: flex-start; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; background: var(--amber); color: #1b1206; padding: 6px 12px; border-radius: 3px; font-weight: 600; }
+@media (max-width: 800px) { .dlc { grid-template-columns: 1fr; } .dlc .im { min-height: 220px; } }
+
+/* обновления */
+.tl { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.tl > li { position: relative; padding: 0 0 34px 28px; }
+.tl > li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--red); }
+.tl > li:first-child::before { background: var(--red); box-shadow: 0 0 0 5px rgba(224,38,43,.2); }
+.tl time { font-family: var(--mono); color: var(--red); font-size: 13px; letter-spacing: .08em; }
+.tl h3 { margin-top: 4px; }
+.tl ul { margin: 6px 0 0; padding-left: 18px; color: #cfc3be; font-size: 15px; }
+
+/* достижения */
+.ach { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ach div { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; min-width: 0; }
+.ach i { width: 44px; height: 44px; border-radius: 4px; display: grid; place-items: center; font-style: normal; font-family: var(--mono); font-weight: 600; color: var(--red); border: 1px solid var(--red-dk); background: rgba(224,38,43,.07); font-size: 13px; }
+.ach b { display: block; font-size: 15px; }
+.ach span { color: var(--muted); font-size: 13.5px; line-height: 1.4; display: block; }
+@media (max-width: 900px) { .ach { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .ach { grid-template-columns: 1fr; } }
+
+/* команда */
+.team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.team .card { flex-direction: row; gap: 18px; align-items: center; }
+.ava { width: 72px; height: 72px; flex: none; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-size: 30px; color: #fff; background: radial-gradient(circle at 35% 30%, #ff5b5f, var(--red-dk)); }
+.ava.alt { background: radial-gradient(circle at 35% 30%, #ffcf7a, #8a4d0c); }
+.testers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 16px; }
+.testers div { border: 1px solid var(--line); border-radius: 6px; padding: 18px 12px; text-align: center; background: linear-gradient(to bottom, #141011, #0c090a); min-width: 0; }
+.testers .stone { width: 44px; height: 54px; margin: 0 auto 10px; border-radius: 22px 22px 4px 4px; background: #4a4446; display: grid; place-items: center; font-family: var(--mono); font-size: 10px; color: #b9b0ad; }
+.testers b { display: block; font-size: 14.5px; overflow-wrap: anywhere; }
+.testers span { font-size: 12.5px; color: var(--muted); }
+@media (max-width: 860px) { .team { grid-template-columns: 1fr; } .testers { grid-template-columns: repeat(2, 1fr); } }
+
+/* вопросы */
+.faq { display: grid; gap: 10px; max-width: 860px; }
+.faq details { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 0 20px; }
+.faq summary { cursor: pointer; padding: 18px 0; font-weight: 600; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::after { content: "+"; font-family: var(--mono); color: var(--red); font-size: 22px; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq p { margin: 0 0 18px; color: #cfc3be; }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px 60px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.eye { cursor: pointer; color: var(--muted); background: none; border: 0; font: inherit; padding: 0; }
+.eye:hover { color: var(--red); }
+
+/* пасхалка: медведь выглядывает */
+.peek { position: fixed; z-index: 80; left: 50%; bottom: 0; transform: translate(-50%, 115%); width: min(560px, 92vw); transition: transform .9s cubic-bezier(.2,.8,.2,1); pointer-events: none; visibility: hidden; }
+.peek img { width: 100%; height: auto; filter: brightness(.9) drop-shadow(0 -10px 40px rgba(0,0,0,.8)); }
+.peek.on { transform: translate(-50%, 22%); visibility: visible; }
+.whisper { position: fixed; z-index: 81; inset: 0; display: grid; place-items: center; pointer-events: none; font-family: var(--display); color: var(--red); font-size: clamp(36px, 8vw, 96px); text-shadow: 0 0 30px rgba(224,38,43,.6); opacity: 0; transition: opacity .3s; text-align: center; padding: 0 16px; }
+.whisper.on { opacity: 1; animation: jit .12s steps(2) infinite; }
+@keyframes jit { 50% { transform: translate(2px, -1px); } }
+.flash { position: fixed; inset: 0; z-index: 79; background: #000; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.flash.on { opacity: .82; }
+@media (prefers-reduced-motion: reduce) { .slide.on img, .slide.on video { animation: none; } .whisper.on { animation: none; } }
+</style>
+</head>
+<body>
+
+<canvas id="noise" aria-hidden="true"></canvas>
+<div class="scan" aria-hidden="true"></div>
+<div class="tracking" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">НОЯБРЬ 2026</a>
+    <div class="links">
+      <a href="#game">Игра</a><a href="#cast">Герои</a><a href="#shots">Кадры</a><a href="#video">Видео</a><a href="#map">Карта</a><a href="#get">Скачать</a><a href="#dlc">DLC</a><a href="#news">Обновления</a><a href="#ach">Достижения</a><a href="#team">Команда</a><a href="#faq">Вопросы</a>
+    </div>
+    <a class="dl" href="#get">Скачать</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="slide on"><img src="img/hero_bear.jpg" alt="Белый медведь в тёмном лесу"></div>
+  <div class="slide"><img src="img/hero_village.jpg" alt="Дом Петровича в деревне Новинка"></div>
+  <div class="slide"><video src="img/hero_clip.mp4" muted playsinline loop preload="metadata" aria-label="Кадры из игры"></video></div>
+  <div class="slide"><img src="img/hero_icon.jpg" alt="Значок игры НОЯБРЬ 2026"></div>
+  <div class="osd tl"><i></i>REC</div>
+  <div class="osd tr">PLAY ▶</div>
+  <div class="osd bl" id="tc">00:00:00</div>
+  <div class="osd br">15.10.2026<br>С. НОВИНКА</div>
+  <div class="hero-c">
+    <h1 class="title">НОЯБРЬ 2026</h1>
+    <p class="tag">С. Новинка, Омская область. Пропал мальчик. Свидетель говорит про белого медведя.</p>
+    <div class="cta"><a class="btn solid" href="#get">▼ Скачать игру</a><a class="btn" href="#video">▶ Смотреть видео</a></div>
+  </div>
+  <div class="dots" role="tablist" aria-label="Слайды"><button class="on" aria-label="Слайд 1"></button><button aria-label="Слайд 2"></button><button aria-label="Слайд 3"></button><button aria-label="Слайд 4"></button></div>
+</header>
+
+<main>
+<section id="game">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <div class="eyebrow">Об игре</div>
+        <h2>3D-хоррор, снятый на старую <em>кассету</em></h2>
+        <p class="lead">«НОЯБРЬ 2026» — сюжетный хоррор про деревню, где начали пропадать люди. Днём ты ходишь по Новинке, говоришь с жителями и ищешь улики. Ночью гасишь свет и слушаешь, кто ходит у забора.</p>
+        <p class="muted">Картинка как с VHS: помехи, зернистость и дрожащий кадр. Каждая серия рассказывает историю глазами другого героя.</p>
+      </div>
+      <div class="case" aria-label="Карточка дела">
+        <span class="stamp">ДЕЛО № 26</span>
+        <b>ПРОПАЛ БЕЗ ВЕСТИ</b>
+        <div class="ph">
+          <img src="img/c_rais.png" alt="Фото Раиса">
+          <dl>
+            <dt>Имя</dt><dd>Иванов Раис Викторович</dd>
+            <dt>Дата</dt><dd>15.10.2026</dd>
+            <dt>Место</dt><dd>с. Новинка, Омская обл.</dd>
+            <dt>Свидетель</dt><dd>Петров Вадим Сергеевич</dd>
+            <dt>Показания</dt><dd>«Белый медведь из ноября»</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="feat">
+      <div><span class="k">СЮЖЕТ</span><h3>Три серии</h3><p>История пропажи глазами Раиса, Вадима и Лены. Допросы, сны, ночная дорога и лес.</p></div>
+      <div><span class="k">ДЕРЕВНЯ</span><h3>Живая Новинка</h3><p>Магазин «Шестёрочка», храм, кладбище, пруд, дежурная часть и жители, у которых есть что рассказать.</p></div>
+      <div><span class="k">НОЧЬ</span><h3>Стук в дверь</h3><p>По ночам приходят гости. Сначала посмотри в глазок и задай вопрос, а потом решай, открывать ли.</p></div>
+      <div><span class="k">ВЫЖИВАНИЕ</span><h3>Дом — твоя крепость</h3><p>Еда, вода, батарейки для фонаря, дрова для печи и доски, чтобы заколотить дыры после ночи.</p></div>
+      <div><span class="k">ДОРОГА</span><h3>Своя машина</h3><p>Садись за руль и езжай по деревне. На телефоне машиной управляют джойстиком.</p></div>
+      <div><span class="k">ВДВОЁМ</span><h3>Мультиплеер</h3><p>Играй вместе с другом: один за Петровича, второй за Серёгу. На компьютере и на телефоне.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cast">
+  <div class="wrap">
+    <div class="eyebrow">Герои</div>
+    <h2>Кто живёт в <em>Новинке</em></h2>
+    <p class="lead">Обычная семья, обычная деревня. Пока не наступил октябрь.</p>
+    <div class="cast">
+      <article class="who"><div class="pic"><img src="img/c_dad.png" alt="Петрович"></div><div class="txt"><div class="role">Отец</div><h3>Петрович</h3><p>Прожил в Новинке всю жизнь. Все его знают, и он знает всех. После пропажи сына не верит, что это просто зверь.</p></div></article>
+      <article class="who"><div class="pic"><img src="img/c_mom.png" alt="Лена"></div><div class="txt"><div class="role">Мать</div><h3>Лена</h3><p>Жена Петровича. Если полиция не может найти сына, она найдёт его сама.</p></div></article>
+      <article class="who"><div class="pic"><img src="img/c_rais.png" alt="Раис"></div><div class="txt"><div class="role">Сын</div><h3>Раис</h3><p>Ушёл с другом погулять за деревню, хотя папа просил не ходить в лес.</p></div></article>
+      <article class="who"><div class="pic"><img src="img/c_vadim.png" alt="Вадим"></div><div class="txt"><div class="role">Друг Раиса</div><h3>Вадим</h3><p>Единственный свидетель. Твердит про медведя, но ему никто не верит.</p></div></article>
+      <article class="who"><div class="pic"><img src="img/c_serega.png" alt="Серёга"></div><div class="txt"><div class="role">Отец Вадима</div><h3>Серёга</h3><p>Считает медведя чушью и запрещает сыну выходить за ограду.</p></div></article>
+      <article class="who bear"><div class="pic wide"><img src="img/c_bear.png" alt="Белый медведь"></div><div class="txt"><div class="role">Объект «Ноябрь»</div><h3>Белый медведь</h3><p>В деревне его называют медведем из ноября 2026-го. Откуда он взялся, никто не знает.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="shots">
+  <div class="wrap">
+    <div class="eyebrow">Кадры</div>
+    <h2>Так выглядит <em>игра</em></h2>
+    <p class="lead">Нажми на кадр, чтобы открыть его крупно.</p>
+    <div class="gal" id="gal">
+      <button class="big" data-src="img/s_home.jpg"><img src="img/s_home.jpg" alt="Дом Петровича" loading="lazy"><span>ДОМ ПЕТРОВИЧА</span></button>
+      <button data-src="img/s_shop.jpg"><img src="img/s_shop.jpg" alt="Магазин Шестёрочка" loading="lazy"><span>«ШЕСТЁРОЧКА»</span></button>
+      <button data-src="img/st_zrya.jpg"><img src="img/st_zrya.jpg" alt="Красная надпись зря" loading="lazy"><span>1 СЕРИЯ</span></button>
+      <button data-src="img/s_cemetery.jpg"><img src="img/s_cemetery.jpg" alt="Кладбище" loading="lazy"><span>КЛАДБИЩЕ</span></button>
+      <button data-src="img/st_lena.jpg"><img src="img/st_lena.jpg" alt="Медведь в лесу" loading="lazy"><span>3 СЕРИЯ</span></button>
+      <button data-src="img/s_kitchen.jpg"><img src="img/s_kitchen.jpg" alt="Кухня" loading="lazy"><span>КУХНЯ</span></button>
+      <button data-src="img/s_zal.jpg"><img src="img/s_zal.jpg" alt="Зал" loading="lazy"><span>ЗАЛ</span></button>
+      <button class="big" data-src="img/s_forest.jpg"><img src="img/s_forest.jpg" alt="Лес" loading="lazy"><span>ЛЕС</span></button>
+      <button data-src="img/st_board.jpg"><img src="img/st_board.jpg" alt="Доска объявлений" loading="lazy"><span>ДОСКА ОБЪЯВЛЕНИЙ</span></button>
+      <button data-src="img/s_street.jpg"><img src="img/s_street.jpg" alt="Улица" loading="lazy"><span>УЛИЦА</span></button>
+      <button data-src="img/s_bedroom.jpg"><img src="img/s_bedroom.jpg" alt="Спальня" loading="lazy"><span>СПАЛЬНЯ</span></button>
+      <button data-src="img/st_25.jpg"><img src="img/st_25.jpg" alt="25-й кадр" loading="lazy"><span>25-Й КАДР</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="wrap">
+    <div class="eyebrow">Видео</div>
+    <h2>Смотри, как делается <em>игра</em></h2>
+    <p class="lead">Ролики из моего канала: что нового в игре и спасибо подписчикам.</p>
+    <div class="vids">
+      <div class="vid"><video src="img/v_today.mp4" poster="img/v_today.jpg" controls playsinline preload="none"></video><h3>Что я сделал за день</h3><p class="muted">10 ноября · 1:16</p></div>
+      <div class="vid"><video src="img/v_1000.mp4" poster="img/v_1000.jpg" controls playsinline preload="none"></video><h3>Нас 1000</h3><p class="muted">11 ноября · 0:47</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="wrap">
+    <div class="eyebrow">Карта</div>
+    <h2>Деревня <em>Новинка</em></h2>
+    <p class="lead">Пшеничное поле, дома жителей, дежурная часть, храм и пруд. За ними со всех сторон лес. Сетка карты — 20 метров.</p>
+    <div class="map"><img src="img/map.jpg" alt="Карта деревни Новинка" loading="lazy"></div>
+    <div class="pins"><span>Наш дом</span><span>Магазин «Шестёрочка»</span><span>Храм</span><span>Дежурная часть</span><span>Кладбище</span><span>Пруд</span><span>Охотничий домик</span><span>Мост через реку</span><span>Доска объявлений</span></div>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="eyebrow">Скачать</div>
+    <h2>Забери кассету <em>себе</em></h2>
+    <p class="lead">Файлы для скачивания появятся здесь совсем скоро. Следи за новостями в Telegram-канале игры.</p>
+    <div class="dlg">
+      <div class="card main"><span class="plat">Windows · полная</span><h3>Вся игра</h3><p>Все три серии, деревня, ночи и мультиплеер.</p><div class="soon">Скоро</div></div>
+      <div class="card"><span class="plat">Windows · 1 акт</span><h3>Первая серия</h3><p>Короткая версия: только история Раиса. Весит меньше.</p><div class="soon">Скоро</div></div>
+      <div class="card"><span class="plat">Android</span><h3>Для телефона</h3><p>Полная игра с сенсорным управлением и подсказками к кнопкам.</p><div class="soon">Скоро</div></div>
+      <div class="card"><span class="plat">Android · старые</span><h3>Для старых телефонов</h3><p>Облегчённая графика для слабых и старых телефонов.</p><div class="soon">Скоро</div></div>
+    </div>
+    <div class="req" id="req">
+      <div><h3>Компьютер</h3><table>
+        <tr><td>Система</td><td>Windows 10 или 11, 64 бита</td></tr>
+        <tr><td>Видеокарта</td><td>С поддержкой OpenGL 3.3</td></tr>
+        <tr><td>Память</td><td>4 ГБ</td></tr>
+        <tr><td>Место</td><td>Около 200 МБ</td></tr>
+        <tr><td>Управление</td><td>Клавиатура и мышь</td></tr>
+      </table></div>
+      <div><h3>Телефон</h3><table>
+        <tr><td>Система</td><td>Android 5.0 и новее</td></tr>
+        <tr><td>Графика</td><td>Обычная версия: OpenGL ES 3.0. Старые телефоны: ES 2.0</td></tr>
+        <tr><td>Место</td><td>Около 150 МБ</td></tr>
+        <tr><td>Управление</td><td>Сенсорное: джойстик и кнопки</td></tr>
+        <tr><td>iPhone</td><td>Пока нет</td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<section id="dlc">
+  <div class="wrap">
+    <div class="eyebrow">DLC</div>
+    <h2>Что было <em>раньше</em></h2>
+    <div class="dlc">
+      <div class="im"><img src="img/dlc_lab.jpg" alt="Лаборатория" loading="lazy"></div>
+      <div class="tx">
+        <span class="pill">В разработке</span>
+        <div class="yr">1986</div>
+        <h3>Лаборатория № 26</h3>
+        <p class="muted">Отдельная история о том, с чего всё началось. Советская лаборатория, секретный эксперимент и объект, которому дали имя «Ноябрь».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap">
+    <div class="eyebrow">Обновления</div>
+    <h2>Дневник <em>разработки</em></h2>
+    <p class="lead">Игру делает один человек, и обновления выходят часто.</p>
+    <ol class="tl">
+      <li><time>11.11.2026</time><h3>Нас 1000</h3><ul><li>На канале игры уже тысяча подписчиков</li><li>Вышло видео-благодарность</li></ul></li>
+      <li><time>10.11.2026</time><h3>Новый сюжет и большой дом</h3><ul><li>Все три серии переделаны по новому сценарию</li><li>Новые персонажи: Михаил, сотрудник полиции, Серёга в полный рост</li><li>Дом Петровича стал в три раза больше</li><li>Новый последний день пролога: дядь Саша у магазина</li><li>Ники тестеров на кладбище</li><li>Новый значок игры</li><li>На телефоне: подсказки к кнопкам, консоль и езда на машине</li></ul></li>
+      <li><time>07.11.2026</time><h3>Мультиплеер</h3><ul><li>Можно играть вдвоём: Петрович и Серёга</li></ul></li>
+      <li><time>03.11.2026</time><h3>Версия для Android</h3><ul><li>Игра вышла на телефоны</li><li>Отдельная версия для старых телефонов</li></ul></li>
+      <li><time>29.10.2026</time><h3>Telegram-канал игры</h3><ul><li>Открылся официальный канал, туда выходят новости и видео</li></ul></li>
+    </ol>
+  </div>
+</section>
+
+<section id="ach">
+  <div class="wrap">
+    <div class="eyebrow">Достижения</div>
+    <h2>Сможешь собрать <em>все?</em></h2>
+    <div class="ach">
+      <div><i>01</i><p><b>Первая ночь</b><span>Пережить первую ночь</span></p></div>
+      <div><i>02</i><p><b>Три ночи</b><span>Пережить три ночи</span></p></div>
+      <div><i>03</i><p><b>Фотограф</b><span>Сделать 5 снимков фотоаппаратом</span></p></div>
+      <div><i>04</i><p><b>Рыбак</b><span>Посидеть с Серёгой у пруда</span></p></div>
+      <div><i>05</i><p><b>Помощник</b><span>Выполнить подработку у соседей</span></p></div>
+      <div><i>06</i><p><b>Трудяга</b><span>Выполнить 5 подработок</span></p></div>
+      <div><i>07</i><p><b>Под кроватью</b><span>Спрятаться и дождаться, пока монстр уйдёт</span></p></div>
+      <div><i>08</i><p><b>Тише воды</b><span>Пережить встречу с белым медведем</span></p></div>
+      <div><i>09</i><p><b>Свет вернулся</b><span>Починить генератор</span></p></div>
+      <div><i>10</i><p><b>Любопытный</b><span>Включить телевизор</span></p></div>
+      <div><i>11</i><p><b>Прихожанин</b><span>Зайти в церковь</span></p></div>
+      <div><i>12</i><p><b>Исследователь</b><span>Побывать у охотника, на мосту и на кладбище</span></p></div>
+      <div><i>13</i><p><b>Богатей</b><span>Накопить 500 ₽</span></p></div>
+      <div><i>14</i><p><b>Кладоискатель</b><span>Найти все тайники в доме</span></p></div>
+      <div><i>15</i><p><b>Пережил хардкор</b><span>Пережить ночь на сложности «Хардкор»</span></p></div>
+      <div><i>16</i><p><b>Следопыт</b><span>Собрать на доске все 12 улик</span></p></div>
+      <div><i>17</i><p><b>Свои люди</b><span>Найти записку-пасхалку</span></p></div>
+      <div><i>18</i><p><b>Хозяин</b><span>Выполнить все дела на день три раза</span></p></div>
+      <div><i>??</i><p><b>Никому не открыл</b><span>Пережить 50 ночей, ни разу не открыв дверь ночному гостю</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="eyebrow">Команда</div>
+    <h2>Кто делает <em>игру</em></h2>
+    <div class="team">
+      <div class="card"><div class="ava">W</div><div><span class="plat">Разработчик</span><h3>W1ntrane</h3><p>Придумывает и делает игру: код на C++, деревня, ночи, видео для канала.</p></div></div>
+      <div class="card"><div class="ava alt">П</div><div><span class="plat">Сценарий</span><h3>petrovich_gandon1337</h3><p>Игра вдохновлена его сериалом. У сериала вышел приквел.</p></div></div>
+    </div>
+    <h3 style="margin-top:44px">Тестеры</h3>
+    <p class="muted" style="margin:0">Находят баги раньше всех. Их ники навсегда остались на кладбище в игре.</p>
+    <div class="testers">
+      <div><div class="stone">R.I.P</div><b>Муха</b><span>тестер</span></div>
+      <div><div class="stone">R.I.P</div><b>петрович гандон</b><span>тестер</span></div>
+      <div><div class="stone">R.I.P</div><b>тамамкин нигодяй</b><span>тестер</span></div>
+      <div><div class="stone">R.I.P</div><b>ELектрический лобзик</b><span>тестер</span></div>
+      <div><div class="stone">R.I.P</div><b>Normik228988</b><span>тестер</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Вопросы</div>
+    <h2>Частые <em>вопросы</em></h2>
+    <div class="faq">
+      <details><summary>Где скачать игру?</summary><p>Файлы скоро появятся на этом сайте в разделе «Скачать». Пока новости и сборки выходят в Telegram-канале игры.</p></details>
+      <details><summary>Как установить на Android?</summary><p>Скачай файл .apk и открой его. Телефон спросит, можно ли ставить приложения из этого источника: разреши. Новую версию ставь прямо поверх старой, сохранения останутся.</p></details>
+      <details><summary>Какую версию выбрать для телефона?</summary><p>Сначала попробуй обычную. Если игра не запускается или показывает чёрный экран, скачай версию для старых телефонов.</p></details>
+      <details><summary>Windows пишет, что «защитила компьютер». Что делать?</summary><p>Так бывает с играми от небольших разработчиков. Нажми «Подробнее», а потом «Выполнить в любом случае».</p></details>
+      <details><summary>Есть ли игра на iPhone?</summary><p>Пока нет. Игра работает на Windows и Android.</p></details>
+      <details><summary>Можно ли играть вдвоём?</summary><p>Да. Один игрок создаёт игру и играет за Петровича, второй подключается и играет за Серёгу.</p></details>
+      <details><summary>Как включить титры через консоль?</summary><p>Поставь в настройках сложность «Практика». На компьютере нажми F1 и напиши credits. На телефоне нажми зелёную кнопку «КОНС» и выбери «credits».</p></details>
+      <details><summary>Нашёл баг. Куда писать?</summary><p>Пиши в комментарии к видео или в Telegram-канал игры. Каждое сообщение читается.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>НОЯБРЬ 2026 · разработчик W1ntrane · по мотивам сериала petrovich_gandon1337</span>
+    <button class="eye" id="eye" aria-label="Что-то в темноте">не нажимай сюда три раза</button>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden><img id="lbimg" alt="Кадр крупно"><button class="btn" id="lbx" aria-label="Закрыть">✕ Закрыть</button></div>
+<div class="flash" id="flash"></div>
+<div class="peek" id="peek" aria-hidden="true"><img src="img/peek_bear.png" alt=""></div>
+<div class="whisper" id="whisper" aria-hidden="true">Я ТЕБЯ ВИЖУ</div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // слайды наверху: каждые 5 секунд
+  const slides = [...document.querySelectorAll('.slide')], dots = [...document.querySelectorAll('.dots button')];
+  let cur = 0, timer;
+  const show = (i) => {
+    slides[cur].classList.remove('on'); dots[cur].classList.remove('on');
+    const v0 = slides[cur].querySelector('video'); if (v0) v0.pause();
+    cur = (i + slides.length) % slides.length;
+    slides[cur].classList.add('on'); dots[cur].classList.add('on');
+    const v = slides[cur].querySelector('video'); if (v) { v.currentTime = 0; v.play().catch(() => {}); }
+  };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(cur + 1), 5000); };
+  dots.forEach((d, i) => d.addEventListener('click', () => { show(i); start(); }));
+  start();
+  // тайм-код
+  const tc = document.getElementById('tc'), t0 = performance.now();
+  setInterval(() => { const s = Math.floor((performance.now() - t0) / 1000); tc.textContent = [s / 3600, (s / 60) % 60, s % 60].map(n => String(Math.floor(n)).padStart(2, '0')).join(':') + ' SP'; }, 250);
+  // шум плёнки
+  const cv = document.getElementById('noise'), cx = cv.getContext('2d');
+  cv.width = 160; cv.height = 90;
+  const img = cx.createImageData(160, 90);
+  const draw = () => { for (let i = 0; i < img.data.length; i += 4) { const v = Math.random() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; } cx.putImageData(img, 0, 0); };
+  draw(); if (!reduce) setInterval(draw, 90);
+  // галерея
+  const lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg');
+  document.querySelectorAll('#gal button').forEach(b => b.addEventListener('click', () => { lbimg.src = b.dataset.src; lbimg.alt = b.querySelector('img').alt; lb.hidden = false; document.getElementById('lbx').focus(); }));
+  const close = () => { lb.hidden = true; };
+  document.getElementById('lbx').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  // пасхалка: три нажатия — или набрать «ноябрь» на клавиатуре
+  let clicks = 0, typed = '';
+  const peek = document.getElementById('peek'), wh = document.getElementById('whisper'), fl = document.getElementById('flash');
+  const scare = () => {
+    fl.classList.add('on'); peek.classList.add('on');
+    setTimeout(() => wh.classList.add('on'), 700);
+    setTimeout(() => { wh.classList.remove('on'); peek.classList.remove('on'); fl.classList.remove('on'); }, 3200);
+  };
+  document.getElementById('eye').addEventListener('click', () => { clicks++; if (clicks >= 3) { clicks = 0; scare(); } });
+  addEventListener('keydown', e => { if (e.key.length !== 1) return; typed = (typed + e.key.toLowerCase()).slice(-6); if (typed === 'ноябрь') scare(); });
+})();
+</script>
+
+</body>
+</html>
