@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="НОЯБРЬ 2026 — 3D-хоррор в стиле VHS про деревню Новинка, где пропадают люди. Для Windows и Android.">
-<meta property="og:title" content="НОЯБРЬ 2026">
-<meta property="og:description" content="3D-хоррор в стиле старой кассеты про деревню Новинка и белого медведя.">
-<meta property="og:image" content="img/hero_bear.jpg">
-<link rel="icon" href="img/hero_icon.jpg">
 <title>НОЯБРЬ 2026</title>
+<meta name="description" content="НОЯБРЬ 2026 — фанатский 3D-хоррор в стиле VHS про деревню Новинка, где пропадают люди. Для Windows и Android.">
+<meta property="og:title" content="НОЯБРЬ 2026">
+<meta property="og:description" content="Фанатский 3D-хоррор в стиле старой кассеты про деревню Новинка и белого медведя.">
+<meta property="og:image" content="img/hero_bear.jpg">
+<meta name="theme-color" content="#070506">
+<link rel="icon" href="img/hero_icon.jpg">
+<link rel="apple-touch-icon" href="img/hero_icon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Rubik:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
 body{margin:0}[hidden]{display:none!important}
+
 /* Сайт как VHS-кассета: чёрный эфир, красная плёнка, моно-тайм-коды; полосы помех поверх всего. Одна тёмная тема, как в игре. */
 :root {
   --bg: #070506; --bg2: #0f0b0c; --panel: #151012; --line: #2a1e20;
@@ -107,14 +110,14 @@ h3 { font-family: var(--head); font-weight: 700; font-size: 20px; margin: 0 0 6p
 
 /* герои */
 .cast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.who { position: relative; background: linear-gradient(to bottom, #1a1113, #0b0809); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: 300px auto; transition: border-color .2s, transform .2s; }
+.who { position: relative; background: linear-gradient(to bottom, #1a1113, #0b0809); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: 300px 1fr; transition: border-color .2s, transform .2s; }
 .who:hover { border-color: var(--red); transform: translateY(-3px); }
 .who .pic { position: relative; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; background: radial-gradient(ellipse at 50% 90%, rgba(224,38,43,.18), transparent 65%); }
 .who .pic img { max-height: 290px; width: auto; filter: drop-shadow(0 10px 18px rgba(0,0,0,.7)); }
 .who .pic.wide img { max-height: none; width: 92%; margin-bottom: 18px; }
 .who .txt { padding: 16px 18px 20px; border-top: 1px solid var(--line); }
 .who .role { font-family: var(--mono); font-size: 12px; color: var(--red); letter-spacing: .1em; text-transform: uppercase; }
-.who p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+.who p { margin: 8px 0 0; color: #c4b8b3; font-size: 15px; line-height: 1.6; }
 .who.bear .pic { background: radial-gradient(ellipse at 50% 80%, rgba(255,255,255,.12), transparent 60%), #050405; }
 @media (max-width: 900px) { .cast { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .cast { grid-template-columns: 1fr; } }
@@ -201,7 +204,7 @@ h3 { font-family: var(--head); font-weight: 700; font-size: 20px; margin: 0 0 6p
 .ava.alt { background: radial-gradient(circle at 35% 30%, #ffcf7a, #8a4d0c); }
 .testers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 16px; }
 .testers div { border: 1px solid var(--line); border-radius: 6px; padding: 18px 12px; text-align: center; background: linear-gradient(to bottom, #141011, #0c090a); min-width: 0; }
-.testers .stone { width: 44px; height: 54px; margin: 0 auto 10px; border-radius: 22px 22px 4px 4px; background: #4a4446; display: grid; place-items: center; font-family: var(--mono); font-size: 10px; color: #b9b0ad; }
+.testers .ava.sm { width: 52px; height: 52px; font-size: 24px; margin: 0 auto 10px; }
 .testers b { display: block; font-size: 14.5px; overflow-wrap: anywhere; }
 .testers span { font-size: 12.5px; color: var(--muted); }
 @media (max-width: 860px) { .team { grid-template-columns: 1fr; } .testers { grid-template-columns: repeat(2, 1fr); } }
@@ -230,26 +233,105 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .flash { position: fixed; inset: 0; z-index: 79; background: #000; opacity: 0; pointer-events: none; transition: opacity .25s; }
 .flash.on { opacity: .82; }
 @media (prefers-reduced-motion: reduce) { .slide.on img, .slide.on video { animation: none; } .whisper.on { animation: none; } }
+
+
+html[lang="en"] .ru, html:not([lang="en"]) .en { display: none !important; }
+/* кнопки в шапке */
+.tog { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 4px; padding: 7px 9px; cursor: pointer; white-space: nowrap; }
+.tog:hover, .tog:focus-visible { color: var(--fg); border-color: var(--red); outline: none; }
+.tog[aria-pressed="true"] { color: var(--fg); border-color: var(--red); }
+/* экран загрузки кассеты */
+.boot { position: fixed; inset: 0; z-index: 90; background: #1c2bd0; color: #fff; font-family: var(--mono); display: grid; place-items: center; animation: bootOut .5s ease 1.3s forwards; pointer-events: none; }
+.boot div { font-size: clamp(28px, 6vw, 64px); letter-spacing: .1em; text-shadow: 2px 0 rgba(255,0,0,.6), -2px 0 rgba(0,255,255,.5); }
+.boot small { position: absolute; left: 24px; top: 20px; font-size: 18px; } .boot em { position: absolute; right: 24px; bottom: 20px; font-size: 18px; font-style: normal; }
+@keyframes bootOut { to { opacity: 0; visibility: hidden; } }
+body.nofx .boot, body.nofx #noise, body.nofx .scan, body.nofx .tracking { display: none !important; }
+body.nofx *, body.nofx *::before, body.nofx *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+/* полоса «до полуночи» */
+.midnight { background: var(--panel); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; text-align: center; padding-block: 12px; color: var(--muted); }
+.midnight b { color: var(--red); font-size: 18px; letter-spacing: .08em; font-variant-numeric: tabular-nums; margin: 0 6px; }
+/* глитч при переходе к разделу */
+section.gl > .wrap { animation: gl .32s steps(3) 1; }
+@keyframes gl { 0% { transform: translate(-6px, 0) skewX(-4deg); filter: hue-rotate(40deg) contrast(1.4); } 50% { transform: translate(5px, 1px); filter: none; } 100% { transform: none; } }
+/* фонарик у героев (только мышь) */
+.who .pic .beam { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle 150px at var(--bx, 50%) var(--by, -400px), transparent 0, transparent 55%, rgba(4,3,3,.96) 100%); transition: opacity .4s; }
+.cast:not(.lit) .beam { display: none; }
+.cast.lit .pic:not(:hover) .beam { opacity: 0; }
+[hidden] { display: none !important; }
+.who.bear img.scary { position: absolute; inset: 0; margin: auto; width: 92%; height: auto; max-height: 96%; object-fit: contain; opacity: 0; }
+.who.bear.boo img.scary { opacity: 1; }
+.who.bear.boo img.calm { opacity: 0; }
+.who.bear.boo { animation: shake .09s steps(2) 10; border-color: var(--red); }
+@keyframes shake { 50% { transform: translate(3px, -2px); } }
+/* кассета «наверх» */
+.rew { position: fixed; z-index: 45; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 74px; height: 48px; border-radius: 6px; background: #1b1617; border: 1px solid var(--red); cursor: pointer; display: grid; place-items: center; opacity: 0; transform: translateY(20px); transition: opacity .3s, transform .3s; padding: 0; }
+.rew.on { opacity: 1; transform: none; }
+.rew svg { width: 60px; height: 34px; }
+.rew.spin .reel { animation: reel .25s linear infinite reverse; transform-origin: center; transform-box: fill-box; }
+@keyframes reel { to { transform: rotate(360deg); } }
+.rew span { position: absolute; bottom: -18px; font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+/* звук */
+.snd { position: fixed; z-index: 45; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+.snd .tog { background: rgba(7,5,6,.85); }
+/* глазок */
+.door { display: grid; grid-template-columns: minmax(0, 420px) 1fr; gap: 36px; align-items: center; }
+.hole { position: relative; aspect-ratio: 1; max-width: 100%; border-radius: 50%; overflow: hidden; background: #000; box-shadow: 0 0 0 14px #2a2223, 0 0 0 18px #110d0e, 0 30px 80px rgba(0,0,0,.8); }
+.hole img { width: 100%; height: 100%; object-fit: cover; transition: opacity .5s; }
+.hole .dark { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); color: var(--muted); font-size: 14px; letter-spacing: .1em; }
+.hole.knock { animation: knock .12s steps(2) 6; }
+@keyframes knock { 50% { transform: translate(4px, 0); } }
+.say { font-size: 20px; min-height: 3.2em; margin: 0 0 8px; }
+.tell { color: var(--amber); font-family: var(--mono); font-size: 14px; min-height: 2.6em; margin: 0 0 18px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.score { font-family: var(--mono); color: var(--muted); margin-top: 18px; font-size: 14px; }
+.verdict { font-family: var(--head); font-weight: 900; font-size: 26px; min-height: 1.4em; margin-top: 12px; }
+.verdict.bad { color: var(--red); } .verdict.ok { color: #7bd88f; }
+@media (max-width: 760px) { .door { grid-template-columns: 1fr; } .hole { max-width: 340px; margin: 0 auto; } }
+/* тест */
+.quiz { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 28px; max-width: 820px; }
+.quiz .q { font-size: 22px; font-weight: 700; margin: 6px 0 18px; }
+.quiz .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quiz .opts button { text-align: left; font: inherit; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; cursor: pointer; }
+.quiz .opts button:hover, .quiz .opts button:focus-visible { border-color: var(--red); outline: none; }
+.quiz .bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.quiz .bar i { display: block; height: 100%; background: var(--red); transition: width .3s; }
+.res { display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: center; }
+.res img { max-height: 260px; width: auto; margin: 0 auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,.7)); }
+@media (max-width: 600px) { .quiz .opts { grid-template-columns: 1fr; } .res { grid-template-columns: 1fr; text-align: center; } }
+/* карта с метками */
+.map { position: relative; }
+.pin { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; background: var(--red); cursor: pointer; box-shadow: 0 0 0 0 rgba(224,38,43,.7); animation: pulse 2s infinite; padding: 0; }
+.pin:hover, .pin:focus-visible, .pin.on { background: var(--amber); outline: none; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 12px rgba(224,38,43,0); } 100% { box-shadow: 0 0 0 0 rgba(224,38,43,0); } }
+@media (max-width: 600px) { .pin { width: 18px; height: 18px; } }
+.place { display: grid; grid-template-columns: minmax(0, 1.2fr) 1fr; gap: 22px; margin-top: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; align-items: center; }
+.place img { width: 100%; border-radius: 4px; aspect-ratio: 16 / 9; object-fit: cover; }
+.place h3 { font-size: 24px; }
+@media (max-width: 700px) { .place { grid-template-columns: 1fr; } }
+/* глаза в темноте */
+.eyes { position: fixed; inset: 0; z-index: 85; background: rgba(0,0,0,0); pointer-events: none; transition: background 4s; }
+.eyes.on { background: rgba(0,0,0,.93); pointer-events: auto; }
+.eyes img { position: absolute; width: 120px; height: auto; opacity: 0; transition: opacity 3s; animation: blinkEye 5s infinite; }
+.eyes.on img { opacity: .9; }
+@keyframes blinkEye { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
 </style>
 </head>
 <body>
-
 <canvas id="noise" aria-hidden="true"></canvas>
 <div class="scan" aria-hidden="true"></div>
 <div class="tracking" aria-hidden="true"></div>
-
-<div class="disc" role="note"><b>Фанатский проект.</b> «НОЯБРЬ 2026» никак не связан с Батек Официал и создан не для того, чтобы заработать деньги.</div>
+<div class="disc" role="note"><span class="ru"><b>Фанатский проект.</b> «НОЯБРЬ 2026» никак не связан с Батек Официал и создан не для того, чтобы заработать деньги.</span><span class="en"><b>Fan project.</b> “NOYABR 2026” is not affiliated with Batek Official in any way and was not made to earn money.</span></div>
 <nav class="nav">
   <div class="wrap">
     <a class="logo" href="#top">НОЯБРЬ 2026</a>
     <div class="links">
-      <a href="#game">Игра</a><a href="#cast">Герои</a><a href="#shots">Кадры</a><a href="#video">Видео</a><a href="#map">Карта</a><a href="#get">Скачать</a><a href="#dlc">DLC</a><a href="#news">Обновления</a><a href="#ach">Достижения</a><a href="#team">Команда</a><a href="#faq">Вопросы</a>
+      <a href="#game"><span class="ru">Игра</span><span class="en">Game</span></a><a href="#cast"><span class="ru">Герои</span><span class="en">Characters</span></a><a href="#shots"><span class="ru">Кадры</span><span class="en">Shots</span></a><a href="#peephole"><span class="ru">Глазок</span><span class="en">Peephole</span></a><a href="#quiz"><span class="ru">Тест</span><span class="en">Quiz</span></a><a href="#video"><span class="ru">Видео</span><span class="en">Video</span></a><a href="#map"><span class="ru">Карта</span><span class="en">Map</span></a><a href="#get"><span class="ru">Скачать</span><span class="en">Download</span></a><a href="#dlc">DLC</a><a href="#news"><span class="ru">Обновления</span><span class="en">Updates</span></a><a href="#ach"><span class="ru">Достижения</span><span class="en">Achievements</span></a><a href="#team"><span class="ru">Команда</span><span class="en">Team</span></a><a href="#faq"><span class="ru">Вопросы</span><span class="en">FAQ</span></a>
     </div>
-    <a class="dl" href="#get">Скачать</a>
+    <button class="tog" id="fxBtn" aria-pressed="false" title="Помехи"><span class="ru">Без помех</span><span class="en">No noise</span></button>
+    <button class="tog" id="langBtn"><span class="ru">EN</span><span class="en">RU</span></button>
+    <a class="dl" href="#get"><span class="ru">Скачать</span><span class="en">Download</span></a>
   </div>
-</nav>
-
-<header class="hero" id="top">
+</nav><header class="hero" id="top">
   <div class="slide on"><img src="img/hero_bear.jpg" alt="Белый медведь в тёмном лесу"></div>
   <div class="slide"><img src="img/hero_village.jpg" alt="Дом Петровича в деревне Новинка"></div>
   <div class="slide"><video src="img/hero_clip.mp4" muted playsinline loop preload="metadata" aria-label="Кадры из игры"></video></div>
@@ -257,250 +339,187 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   <div class="osd tl"><i></i>REC</div>
   <div class="osd tr">PLAY ▶</div>
   <div class="osd bl" id="tc">00:00:00</div>
-  <div class="osd br">15.10.2026<br>С. НОВИНКА</div>
+  <div class="osd br">15.10.2026<br><span class="ru">С. НОВИНКА</span><span class="en">NOVINKA VILLAGE</span></div>
   <div class="hero-c">
     <h1 class="title">НОЯБРЬ 2026</h1>
-    <p class="tag">С. Новинка, Омская область. Пропал мальчик. Свидетель говорит про белого медведя.</p>
-    <div class="cta"><a class="btn solid" href="#get">▼ Скачать игру</a><a class="btn" href="#video">▶ Смотреть видео</a></div>
+    <p class="tag"><span class="ru">С. Новинка, Омская область. Пропал мальчик. Свидетель говорит про белого медведя.</span><span class="en">Novinka village, Omsk region. A boy is missing. The only witness keeps talking about a white bear.</span></p>
+    <div class="cta"><a class="btn solid" href="#get">▼ <span class="ru">Скачать игру</span><span class="en">Download</span></a><a class="btn" href="#video">▶ <span class="ru">Смотреть видео</span><span class="en">Watch video</span></a></div>
   </div>
-  <div class="dots" role="tablist" aria-label="Слайды"><button class="on" aria-label="Слайд 1"></button><button aria-label="Слайд 2"></button><button aria-label="Слайд 3"></button><button aria-label="Слайд 4"></button></div>
+  <div class="dots" role="tablist" aria-label="Слайды"><button class="on" aria-label="1"></button><button aria-label="2"></button><button aria-label="3"></button><button aria-label="4"></button></div>
 </header>
-
-<main>
-<section id="game">
+<div class="midnight"><span class="ru">До полуночи в Новинке</span><span class="en">Midnight in Novinka in</span> <b id="mid">--:--:--</b> <span class="ru">— запри дверь</span><span class="en">— lock the door</span></div><main><section id="game">
   <div class="wrap">
     <div class="about">
       <div>
-        <div class="eyebrow">Об игре</div>
-        <h2>3D-хоррор, снятый на старую <em>кассету</em></h2>
-        <p class="lead">«НОЯБРЬ 2026» — сюжетный хоррор про деревню, где начали пропадать люди. Днём ты ходишь по Новинке, говоришь с жителями и ищешь улики. Ночью гасишь свет и слушаешь, кто ходит у забора.</p>
-        <p class="muted">Картинка как с VHS: помехи, зернистость и дрожащий кадр. Каждая серия рассказывает историю глазами другого героя.</p>
+        <div class="eyebrow"><span class="ru">Об игре</span><span class="en">About</span></div>
+        <h2><span class="ru">3D-хоррор, снятый на старую <em>кассету</em></span><span class="en">A 3D horror shot on an old <em>tape</em></span></h2>
+        <p class="lead"><span class="ru">«НОЯБРЬ 2026» — сюжетный хоррор про деревню, где начали пропадать люди. Днём ты ходишь по Новинке, говоришь с жителями и ищешь улики. Ночью гасишь свет и слушаешь, кто ходит у забора.</span><span class="en">“NOYABR 2026” (November 2026) is a story horror game about a village where people started to disappear. By day you walk around Novinka, talk to the villagers and look for clues. At night you turn off the lights and listen to who is walking by the fence.</span></p>
+        <p class="muted"><span class="ru">Картинка как с VHS: помехи, зернистость и дрожащий кадр. Каждая серия рассказывает историю глазами другого героя.</span><span class="en">The picture looks like VHS: noise, grain and a shaky frame. Each episode tells the story through the eyes of a different hero.</span></p>
       </div>
       <div class="case" aria-label="Карточка дела">
-        <span class="stamp">ДЕЛО № 26</span>
-        <b>ПРОПАЛ БЕЗ ВЕСТИ</b>
+        <span class="stamp"><span class="ru">ДЕЛО № 26</span><span class="en">CASE № 26</span></span>
+        <b><span class="ru">ПРОПАЛ БЕЗ ВЕСТИ</span><span class="en">MISSING</span></b>
         <div class="ph">
-          <img src="img/c_rais.png" alt="Фото Раиса">
+          <img src="img/c_rais.png" alt="Раис">
           <dl>
-            <dt>Имя</dt><dd>Иванов Раис Викторович</dd>
-            <dt>Дата</dt><dd>15.10.2026</dd>
-            <dt>Место</dt><dd>с. Новинка, Омская обл.</dd>
-            <dt>Свидетель</dt><dd>Петров Вадим Сергеевич</dd>
-            <dt>Показания</dt><dd>«Белый медведь из ноября»</dd>
+            <dt><span class="ru">Имя</span><span class="en">Name</span></dt><dd><span class="ru">Иванов Раис Викторович</span><span class="en">Rais Viktorovich Ivanov</span></dd>
+            <dt><span class="ru">Дата</span><span class="en">Date</span></dt><dd>15.10.2026</dd>
+            <dt><span class="ru">Место</span><span class="en">Place</span></dt><dd><span class="ru">с. Новинка, Омская обл.</span><span class="en">Novinka, Omsk region</span></dd>
+            <dt><span class="ru">Свидетель</span><span class="en">Witness</span></dt><dd><span class="ru">Петров Вадим Сергеевич</span><span class="en">Vadim Sergeevich Petrov</span></dd>
+            <dt><span class="ru">Показания</span><span class="en">Statement</span></dt><dd><span class="ru">«Белый медведь из ноября»</span><span class="en">“A white bear from November”</span></dd>
           </dl>
         </div>
       </div>
     </div>
-    <div class="feat">
-      <div><span class="k">СЮЖЕТ</span><h3>Три серии</h3><p>История пропажи глазами Раиса, Вадима и Лены. Допросы, сны, ночная дорога и лес.</p></div>
-      <div><span class="k">ДЕРЕВНЯ</span><h3>Живая Новинка</h3><p>Магазин «Шестёрочка», храм, кладбище, пруд, дежурная часть и жители, у которых есть что рассказать.</p></div>
-      <div><span class="k">НОЧЬ</span><h3>Стук в дверь</h3><p>По ночам приходят гости. Сначала посмотри в глазок и задай вопрос, а потом решай, открывать ли.</p></div>
-      <div><span class="k">ВЫЖИВАНИЕ</span><h3>Дом — твоя крепость</h3><p>Еда, вода, батарейки для фонаря, дрова для печи и доски, чтобы заколотить дыры после ночи.</p></div>
-      <div><span class="k">ДОРОГА</span><h3>Своя машина</h3><p>Садись за руль и езжай по деревне. На телефоне машиной управляют джойстиком.</p></div>
-      <div><span class="k">ВДВОЁМ</span><h3>Мультиплеер</h3><p>Играй вместе с другом: один за Петровича, второй за Серёгу. На компьютере и на телефоне.</p></div>
-    </div>
+    <div class="feat"><div><span class="k"><span class="ru">СЮЖЕТ</span><span class="en">STORY</span></span><h3><span class="ru">Три серии</span><span class="en">Three episodes</span></h3><p><span class="ru">История пропажи глазами Раиса, Вадима и Лены. Допросы, сны, ночная дорога и лес.</span><span class="en">The disappearance seen through the eyes of Rais, Vadim and Lena. Interrogations, dreams, a night road and the forest.</span></p></div><div><span class="k"><span class="ru">ДЕРЕВНЯ</span><span class="en">VILLAGE</span></span><h3><span class="ru">Живая Новинка</span><span class="en">Living Novinka</span></h3><p><span class="ru">Магазин «Шестёрочка», храм, кладбище, пруд, дежурная часть и жители, у которых есть что рассказать.</span><span class="en">A corner shop, a church, a cemetery, a pond, the police station and villagers with stories to tell.</span></p></div><div><span class="k"><span class="ru">НОЧЬ</span><span class="en">NIGHT</span></span><h3><span class="ru">Стук в дверь</span><span class="en">A knock at the door</span></h3><p><span class="ru">По ночам приходят гости. Сначала посмотри в глазок и задай вопрос, а потом решай, открывать ли.</span><span class="en">Guests come at night. Look through the peephole, ask a question, then decide whether to open.</span></p></div><div><span class="k"><span class="ru">ВЫЖИВАНИЕ</span><span class="en">SURVIVAL</span></span><h3><span class="ru">Дом — твоя крепость</span><span class="en">Your house is your fortress</span></h3><p><span class="ru">Еда, вода, батарейки для фонаря, дрова для печи и доски, чтобы заколотить дыры после ночи.</span><span class="en">Food, water, flashlight batteries, firewood for the stove and boards to patch the holes after each night.</span></p></div><div><span class="k"><span class="ru">ДОРОГА</span><span class="en">ROAD</span></span><h3><span class="ru">Своя машина</span><span class="en">Your own car</span></h3><p><span class="ru">Садись за руль и езжай по деревне. На телефоне машиной управляют джойстиком.</span><span class="en">Get behind the wheel and drive around the village. On phones you steer with the joystick.</span></p></div><div><span class="k"><span class="ru">ВДВОЁМ</span><span class="en">CO-OP</span></span><h3><span class="ru">Мультиплеер</span><span class="en">Multiplayer</span></h3><p><span class="ru">Играй вместе с другом: один за Петровича, второй за Серёгу. На компьютере и на телефоне.</span><span class="en">Play with a friend: one as Petrovich, the other as Seryoga. On PC and on phones.</span></p></div></div>
   </div>
-</section>
-
-<section id="cast">
+</section><section id="cast">
   <div class="wrap">
-    <div class="eyebrow">Герои</div>
-    <h2>Кто живёт в <em>Новинке</em></h2>
-    <p class="lead">Обычная семья, обычная деревня. Пока не наступил октябрь.</p>
-    <div class="cast">
-      <article class="who"><div class="pic"><img src="img/c_dad.png" alt="Петрович"></div><div class="txt"><div class="role">Отец</div><h3>Петрович</h3><p>Прожил в Новинке всю жизнь. Все его знают, и он знает всех. После пропажи сына не верит, что это просто зверь.</p></div></article>
-      <article class="who"><div class="pic"><img src="img/c_mom.png" alt="Лена"></div><div class="txt"><div class="role">Мать</div><h3>Лена</h3><p>Жена Петровича. Если полиция не может найти сына, она найдёт его сама.</p></div></article>
-      <article class="who"><div class="pic"><img src="img/c_rais.png" alt="Раис"></div><div class="txt"><div class="role">Сын</div><h3>Раис</h3><p>Ушёл с другом погулять за деревню, хотя папа просил не ходить в лес.</p></div></article>
-      <article class="who"><div class="pic"><img src="img/c_vadim.png" alt="Вадим"></div><div class="txt"><div class="role">Друг Раиса</div><h3>Вадим</h3><p>Единственный свидетель. Твердит про медведя, но ему никто не верит.</p></div></article>
-      <article class="who"><div class="pic"><img src="img/c_serega.png" alt="Серёга"></div><div class="txt"><div class="role">Отец Вадима</div><h3>Серёга</h3><p>Считает медведя чушью и запрещает сыну выходить за ограду.</p></div></article>
-      <article class="who bear"><div class="pic wide"><img src="img/c_bear.png" alt="Белый медведь"></div><div class="txt"><div class="role">Объект «Ноябрь»</div><h3>Белый медведь</h3><p>В деревне его называют медведем из ноября 2026-го. Откуда он взялся, никто не знает.</p></div></article>
-    </div>
+    <div class="eyebrow"><span class="ru">Герои</span><span class="en">Characters</span></div>
+    <h2><span class="ru">Кто живёт в <em>Новинке</em></span><span class="en">Who lives in <em>Novinka</em></span></h2>
+    <p class="lead"><span class="ru">Обычная семья, обычная деревня. Пока не наступил октябрь. На компьютере наведи мышку: здесь темно, свети фонариком.</span><span class="en">An ordinary family, an ordinary village. Until October came. On a computer, move your mouse: it’s dark here, use the flashlight.</span></p>
+    <div class="cast" id="cast-grid"><article class="who"><div class="pic"><img src="img/c_dad.png" alt="Петрович" loading="lazy"><div class="beam"></div></div><div class="txt"><div class="role"><span class="ru">Отец</span><span class="en">Father</span></div><h3><span class="ru">Петрович</span><span class="en">Petrovich</span></h3><p><span class="ru">Прожил в Новинке всю жизнь, поэтому его знает каждый житель, от продавщицы в «Шестёрочке» до батюшки в храме. Муж Лены и отец Раиса. Первым в семье заговорил про медведя «из ноября 2026» и просил сына не ходить в лес. Ездит на старой бежевой «шестёрке» и дружит со старым охотником дядь Сашей. Именно за него ты проходишь пролог и переживаешь ночи в пустом доме.</span><span class="en">He has lived in Novinka all his life, so everyone knows him, from the shop assistant to the priest. Lena’s husband and Rais’s father. He was the first in the family to talk about the bear “from November 2026” and asked his son not to go into the forest. He drives an old beige Lada and is friends with the old hunter, uncle Sasha. You play as him in the prologue and survive the nights in the empty house.</span></p></div></article><article class="who"><div class="pic"><img src="img/c_mom.png" alt="Лена" loading="lazy"><div class="beam"></div></div><div class="txt"><div class="role"><span class="ru">Мать</span><span class="en">Mother</span></div><h3><span class="ru">Лена</span><span class="en">Lena</span></h3><p><span class="ru">Жена Петровича и мама Раиса: рыжие кудрявые волосы, очки и платье в ромашках. Держит дом и семью, пока Петрович занят хозяйством. В медведя не верит и злится, когда муж снова про него заговаривает. Когда полиция разводит руками, сама едет в отдел и требует искать сына. Готова пойти куда угодно, лишь бы вернуть Раиса домой.</span><span class="en">Petrovich’s wife and Rais’s mother: curly red hair, glasses and a daisy dress. She runs the house and the family while Petrovich does the chores. She does not believe in the bear and gets angry whenever her husband brings it up. When the police shrug, she goes to the station herself and demands they look for her son. She is ready to go anywhere to bring Rais home.</span></p></div></article><article class="who"><div class="pic"><img src="img/c_rais.png" alt="Раис" loading="lazy"><div class="beam"></div></div><div class="txt"><div class="role"><span class="ru">Сын</span><span class="en">Son</span></div><h3><span class="ru">Раис</span><span class="en">Rais</span></h3><p><span class="ru">Иванов Раис Викторович, сын Петровича и Лены. Лучший друг Вадима, вместе они гуляют за деревней. Папа просил его не ходить в лес, но в тот день начался дождь. 15 октября 2026 года Раис пропал, и на доске объявлений появилось его фото. С тех пор в деревне шепчутся, что он кому-то снится.</span><span class="en">Rais Viktorovich Ivanov, son of Petrovich and Lena. Vadim’s best friend; the two of them like to walk outside the village. His dad asked him not to go into the forest, but that day it started to rain. On October 15, 2026 Rais disappeared, and his photo appeared on the notice board. Since then the villagers whisper that he appears in someone’s dreams.</span></p></div></article><article class="who"><div class="pic"><img src="img/c_vadim.png" alt="Вадим" loading="lazy"><div class="beam"></div></div><div class="txt"><div class="role"><span class="ru">Друг Раиса</span><span class="en">Rais’s friend</span></div><h3><span class="ru">Вадим</span><span class="en">Vadim</span></h3><p><span class="ru">Петров Вадим Сергеевич, лучший друг Раиса и сын Серёги. Смелый на словах: смеялся над «медведем из ноября» и сам позвал друга в лес. Носит с собой фонарик с Озона, который вечно садится в самый неподходящий момент. После той ночи стал единственным свидетелем и твердит про белого медведя. Ему никто не верит, а следователь даже считает его подозреваемым.</span><span class="en">Vadim Sergeevich Petrov, Rais’s best friend and Seryoga’s son. Brave in words: he laughed at the “bear from November” and invited his friend into the forest himself. He carries a cheap online-store flashlight that always dies at the worst moment. After that night he became the only witness and keeps talking about a white bear. Nobody believes him, and the investigator even treats him as a suspect.</span></p></div></article><article class="who"><div class="pic"><img src="img/c_serega.png" alt="Серёга" loading="lazy"><div class="beam"></div></div><div class="txt"><div class="role"><span class="ru">Отец Вадима</span><span class="en">Vadim’s father</span></div><h3><span class="ru">Серёга</span><span class="en">Seryoga</span></h3><p><span class="ru">Отец Вадима: спортивный костюм, кепка и усы. Живёт с сыном в своём доме в Новинке. Про медведя слышать не хочет и считает всё это чушью. После пропажи Раиса запрещает Вадиму выходить дальше ограды. Жалеет Петровича и Лену и зовёт друга посидеть у пруда с удочкой.</span><span class="en">Vadim’s father: tracksuit, flat cap and a moustache. He lives with his son in their house in Novinka. He doesn’t want to hear about the bear and thinks it’s all nonsense. After Rais disappears he forbids Vadim to go beyond the fence. He feels for Petrovich and Lena and invites his friend to go fishing at the pond.</span></p></div></article><article class="who bear" id="bearCard"><div class="pic wide"><img class="calm" src="img/c_bear.png" alt="Белый медведь" loading="lazy"><img class="scary" src="img/bear_scary.png" alt="" aria-hidden="true"><div class="beam"></div></div><div class="txt"><div class="role"><span class="ru">Объект «Ноябрь»</span><span class="en">Object “November”</span></div><h3><span class="ru">Белый медведь</span><span class="en">The white bear</span></h3><p><span class="ru">В деревне его называют медведем из ноября 2026-го, хотя раньше здесь не водились даже волки. Появляется только ночью и только в лесу. Его не видно днём, но ночью от него не спрячешься в темноте. С его появлением в Новинке начали пропадать люди. Откуда он взялся, знают очень немногие.</span><span class="en">The villagers call him the bear from November 2026, although there weren’t even wolves here before. He appears only at night and only in the forest. You won’t see him by day, but at night the darkness won’t hide you from him. Since he appeared, people in Novinka have started to disappear. Very few know where he came from.</span></p></div></article></div>
   </div>
-</section>
-
-<section id="shots">
+</section><section id="shots">
   <div class="wrap">
-    <div class="eyebrow">Кадры</div>
-    <h2>Так выглядит <em>игра</em></h2>
-    <p class="lead">Нажми на кадр, чтобы открыть его крупно.</p>
-    <div class="gal" id="gal">
-      <button class="big" data-src="img/s_home.jpg"><img src="img/s_home.jpg" alt="Дом Петровича" loading="lazy"><span>ДОМ ПЕТРОВИЧА</span></button>
-      <button data-src="img/s_shop.jpg"><img src="img/s_shop.jpg" alt="Магазин Шестёрочка" loading="lazy"><span>«ШЕСТЁРОЧКА»</span></button>
-      <button data-src="img/st_zrya.jpg"><img src="img/st_zrya.jpg" alt="Красная надпись зря" loading="lazy"><span>1 СЕРИЯ</span></button>
-      <button data-src="img/s_cemetery.jpg"><img src="img/s_cemetery.jpg" alt="Кладбище" loading="lazy"><span>КЛАДБИЩЕ</span></button>
-      <button data-src="img/st_lena.jpg"><img src="img/st_lena.jpg" alt="Медведь в лесу" loading="lazy"><span>3 СЕРИЯ</span></button>
-      <button data-src="img/s_kitchen.jpg"><img src="img/s_kitchen.jpg" alt="Кухня" loading="lazy"><span>КУХНЯ</span></button>
-      <button data-src="img/s_zal.jpg"><img src="img/s_zal.jpg" alt="Зал" loading="lazy"><span>ЗАЛ</span></button>
-      <button class="big" data-src="img/s_forest.jpg"><img src="img/s_forest.jpg" alt="Лес" loading="lazy"><span>ЛЕС</span></button>
-      <button data-src="img/st_board.jpg"><img src="img/st_board.jpg" alt="Доска объявлений" loading="lazy"><span>ДОСКА ОБЪЯВЛЕНИЙ</span></button>
-      <button data-src="img/s_street.jpg"><img src="img/s_street.jpg" alt="Улица" loading="lazy"><span>УЛИЦА</span></button>
-      <button data-src="img/s_bedroom.jpg"><img src="img/s_bedroom.jpg" alt="Спальня" loading="lazy"><span>СПАЛЬНЯ</span></button>
-      <button data-src="img/st_25.jpg"><img src="img/st_25.jpg" alt="25-й кадр" loading="lazy"><span>25-Й КАДР</span></button>
-    </div>
+    <div class="eyebrow"><span class="ru">Кадры</span><span class="en">Shots</span></div>
+    <h2><span class="ru">Так выглядит <em>игра</em></span><span class="en">This is what the <em>game</em> looks like</span></h2>
+    <p class="lead"><span class="ru">Нажми на кадр, чтобы открыть его крупно.</span><span class="en">Tap a shot to open it full size.</span></p>
+    <div class="gal" id="gal"><button class="big" data-src="img/s_home.jpg"><img src="img/s_home.jpg" alt="ДОМ ПЕТРОВИЧА" loading="lazy"><span><span class="ru">ДОМ ПЕТРОВИЧА</span><span class="en">PETROVICH’S HOUSE</span></span></button><button class="" data-src="img/s_shop.jpg"><img src="img/s_shop.jpg" alt="«ШЕСТЁРОЧКА»" loading="lazy"><span><span class="ru">«ШЕСТЁРОЧКА»</span><span class="en">CORNER SHOP</span></span></button><button class="" data-src="img/st_zrya.jpg"><img src="img/st_zrya.jpg" alt="1 СЕРИЯ" loading="lazy"><span><span class="ru">1 СЕРИЯ</span><span class="en">EPISODE 1</span></span></button><button class="" data-src="img/s_cemetery.jpg"><img src="img/s_cemetery.jpg" alt="КЛАДБИЩЕ" loading="lazy"><span><span class="ru">КЛАДБИЩЕ</span><span class="en">CEMETERY</span></span></button><button class="" data-src="img/st_lena.jpg"><img src="img/st_lena.jpg" alt="3 СЕРИЯ" loading="lazy"><span><span class="ru">3 СЕРИЯ</span><span class="en">EPISODE 3</span></span></button><button class="" data-src="img/s_kitchen.jpg"><img src="img/s_kitchen.jpg" alt="КУХНЯ" loading="lazy"><span><span class="ru">КУХНЯ</span><span class="en">KITCHEN</span></span></button><button class="" data-src="img/s_zal.jpg"><img src="img/s_zal.jpg" alt="ЗАЛ" loading="lazy"><span><span class="ru">ЗАЛ</span><span class="en">LIVING ROOM</span></span></button><button class="big" data-src="img/s_forest.jpg"><img src="img/s_forest.jpg" alt="ЛЕС" loading="lazy"><span><span class="ru">ЛЕС</span><span class="en">FOREST</span></span></button><button class="" data-src="img/st_board.jpg"><img src="img/st_board.jpg" alt="ДОСКА ОБЪЯВЛЕНИЙ" loading="lazy"><span><span class="ru">ДОСКА ОБЪЯВЛЕНИЙ</span><span class="en">NOTICE BOARD</span></span></button><button class="" data-src="img/s_street.jpg"><img src="img/s_street.jpg" alt="УЛИЦА" loading="lazy"><span><span class="ru">УЛИЦА</span><span class="en">STREET</span></span></button><button class="" data-src="img/s_bedroom.jpg"><img src="img/s_bedroom.jpg" alt="СПАЛЬНЯ" loading="lazy"><span><span class="ru">СПАЛЬНЯ</span><span class="en">BEDROOM</span></span></button><button class="" data-src="img/st_25.jpg"><img src="img/st_25.jpg" alt="25-Й КАДР" loading="lazy"><span><span class="ru">25-Й КАДР</span><span class="en">25TH FRAME</span></span></button></div>
   </div>
-</section>
-
-<section id="video">
+</section><section id="peephole">
   <div class="wrap">
-    <div class="eyebrow">Видео</div>
-    <h2>Смотри, как делается <em>игра</em></h2>
-    <p class="lead">Ролики из моего канала: что нового в игре и спасибо подписчикам.</p>
-    <div class="vids">
-      <div class="vid"><video src="img/v_today.mp4" poster="img/v_today.jpg" controls playsinline preload="none"></video><h3>Что я сделал за день</h3><p class="muted">10 ноября · 1:16</p></div>
-      <div class="vid"><video src="img/v_1000.mp4" poster="img/v_1000.jpg" controls playsinline preload="none"></video><h3>Нас 1000</h3><p class="muted">11 ноября · 0:47</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="map">
-  <div class="wrap">
-    <div class="eyebrow">Карта</div>
-    <h2>Деревня <em>Новинка</em></h2>
-    <p class="lead">Пшеничное поле, дома жителей, дежурная часть, храм и пруд. За ними со всех сторон лес. Сетка карты — 20 метров.</p>
-    <div class="map"><img src="img/map.jpg" alt="Карта деревни Новинка" loading="lazy"></div>
-    <div class="pins"><span>Наш дом</span><span>Магазин «Шестёрочка»</span><span>Храм</span><span>Дежурная часть</span><span>Кладбище</span><span>Пруд</span><span>Охотничий домик</span><span>Мост через реку</span><span>Доска объявлений</span></div>
-  </div>
-</section>
-
-<section id="get">
-  <div class="wrap">
-    <div class="eyebrow">Скачать</div>
-    <h2>Забери кассету <em>себе</em></h2>
-    <p class="lead">Файлы для скачивания появятся здесь совсем скоро. Следи за новостями в Telegram-канале игры.</p>
-    <div class="dlg">
-      <div class="card main"><span class="plat">Windows · полная</span><h3>Вся игра</h3><p>Все три серии, деревня, ночи и мультиплеер.</p><div class="soon">Скоро</div></div>
-      <div class="card"><span class="plat">Windows · 1 акт</span><h3>Первая серия</h3><p>Короткая версия: только история Раиса. Весит меньше.</p><div class="soon">Скоро</div></div>
-      <div class="card"><span class="plat">Android</span><h3>Для телефона</h3><p>Полная игра с сенсорным управлением и подсказками к кнопкам.</p><div class="soon">Скоро</div></div>
-      <div class="card"><span class="plat">Android · старые</span><h3>Для старых телефонов</h3><p>Облегчённая графика для слабых и старых телефонов.</p><div class="soon">Скоро</div></div>
-    </div>
-    <div class="req" id="req">
-      <div><h3>Компьютер</h3><table>
-        <tr><td>Система</td><td>Windows 10 или 11, 64 бита</td></tr>
-        <tr><td>Видеокарта</td><td>С поддержкой OpenGL 3.3</td></tr>
-        <tr><td>Память</td><td>4 ГБ</td></tr>
-        <tr><td>Место</td><td>Около 200 МБ</td></tr>
-        <tr><td>Управление</td><td>Клавиатура и мышь</td></tr>
-      </table></div>
-      <div><h3>Телефон</h3><table>
-        <tr><td>Система</td><td>Android 5.0 и новее</td></tr>
-        <tr><td>Графика</td><td>Обычная версия: OpenGL ES 3.0. Старые телефоны: ES 2.0</td></tr>
-        <tr><td>Место</td><td>Около 150 МБ</td></tr>
-        <tr><td>Управление</td><td>Сенсорное: джойстик и кнопки</td></tr>
-        <tr><td>iPhone</td><td>Пока нет</td></tr>
-      </table></div>
-    </div>
-  </div>
-</section>
-
-<section id="dlc">
-  <div class="wrap">
-    <div class="eyebrow">DLC</div>
-    <h2>Что было <em>раньше</em></h2>
-    <div class="dlc">
-      <div class="im"><img src="img/dlc_lab.jpg" alt="Лаборатория" loading="lazy"></div>
-      <div class="tx">
-        <span class="pill">В разработке</span>
-        <div class="yr">1986</div>
-        <h3>Лаборатория № 26</h3>
-        <p class="muted">Отдельная история о том, с чего всё началось. Советская лаборатория, секретный эксперимент и объект, которому дали имя «Ноябрь».</p>
+    <div class="eyebrow"><span class="ru">Мини-игра</span><span class="en">Mini-game</span></div>
+    <h2><span class="ru">Кто там <em>стучит?</em></span><span class="en">Who is <em>knocking?</em></span></h2>
+    <p class="lead"><span class="ru">Ночь, в дверь стучат. Посмотри в глазок, послушай гостя и реши, открывать ли. Медведь умеет притворяться людьми, но всегда выдаёт себя мелочью. 5 гостей.</span><span class="en">It’s night and someone is knocking. Look through the peephole, listen to the guest and decide whether to open. The bear can pretend to be people, but always gives itself away with a small detail. 5 guests.</span></p>
+    <div class="door">
+      <div class="hole" id="hole"><img id="guestImg" alt="" hidden><div class="dark" id="holeDark"><span class="ru">ТЕМНО</span><span class="en">DARK</span></div></div>
+      <div>
+        <p class="say" id="say"><span class="ru">Нажми «Стук», чтобы начать ночь.</span><span class="en">Press “Knock” to start the night.</span></p>
+        <p class="tell" id="tell"></p>
+        <div class="row">
+          <button class="btn solid" id="knockBtn"><span class="ru">Стук</span><span class="en">Knock</span></button>
+          <button class="btn" id="openBtn" disabled><span class="ru">Открыть</span><span class="en">Open</span></button>
+          <button class="btn" id="keepBtn" disabled><span class="ru">Не открывать</span><span class="en">Keep closed</span></button>
+        </div>
+        <div class="verdict" id="verdict"></div>
+        <div class="score" id="score"></div>
       </div>
     </div>
   </div>
-</section>
-
-<section id="news">
+</section><section id="quiz">
   <div class="wrap">
-    <div class="eyebrow">Обновления</div>
-    <h2>Дневник <em>разработки</em></h2>
-    <p class="lead">Игру делает один человек, и обновления выходят часто.</p>
-    <ol class="tl">
-      <li><time>11.11.2026</time><h3>Нас 1000</h3><ul><li>На канале игры уже тысяча подписчиков</li><li>Вышло видео-благодарность</li></ul></li>
-      <li><time>10.11.2026</time><h3>Новый сюжет и большой дом</h3><ul><li>Все три серии переделаны по новому сценарию</li><li>Новые персонажи: Михаил, сотрудник полиции, Серёга в полный рост</li><li>Дом Петровича стал в три раза больше</li><li>Новый последний день пролога: дядь Саша у магазина</li><li>Ники тестеров на кладбище</li><li>Новый значок игры</li><li>На телефоне: подсказки к кнопкам, консоль и езда на машине</li></ul></li>
-      <li><time>07.11.2026</time><h3>Мультиплеер</h3><ul><li>Можно играть вдвоём: Петрович и Серёга</li></ul></li>
-      <li><time>03.11.2026</time><h3>Версия для Android</h3><ul><li>Игра вышла на телефоны</li><li>Отдельная версия для старых телефонов</li></ul></li>
-      <li><time>29.10.2026</time><h3>Telegram-канал игры</h3><ul><li>Открылся официальный канал, туда выходят новости и видео</li></ul></li>
-    </ol>
+    <div class="eyebrow"><span class="ru">Тест</span><span class="en">Quiz</span></div>
+    <h2><span class="ru">Кто ты из <em>Новинки?</em></span><span class="en">Who are you in <em>Novinka?</em></span></h2>
+    <p class="lead"><span class="ru">5 вопросов, и ты узнаешь, на кого из героев ты похож.</span><span class="en">5 questions to find out which character you are.</span></p>
+    <div class="quiz" id="quizBox"></div>
   </div>
-</section>
-
-<section id="ach">
+</section><section id="video">
   <div class="wrap">
-    <div class="eyebrow">Достижения</div>
-    <h2>Сможешь собрать <em>все?</em></h2>
-    <div class="ach">
-      <div><i>01</i><p><b>Первая ночь</b><span>Пережить первую ночь</span></p></div>
-      <div><i>02</i><p><b>Три ночи</b><span>Пережить три ночи</span></p></div>
-      <div><i>03</i><p><b>Фотограф</b><span>Сделать 5 снимков фотоаппаратом</span></p></div>
-      <div><i>04</i><p><b>Рыбак</b><span>Посидеть с Серёгой у пруда</span></p></div>
-      <div><i>05</i><p><b>Помощник</b><span>Выполнить подработку у соседей</span></p></div>
-      <div><i>06</i><p><b>Трудяга</b><span>Выполнить 5 подработок</span></p></div>
-      <div><i>07</i><p><b>Под кроватью</b><span>Спрятаться и дождаться, пока монстр уйдёт</span></p></div>
-      <div><i>08</i><p><b>Тише воды</b><span>Пережить встречу с белым медведем</span></p></div>
-      <div><i>09</i><p><b>Свет вернулся</b><span>Починить генератор</span></p></div>
-      <div><i>10</i><p><b>Любопытный</b><span>Включить телевизор</span></p></div>
-      <div><i>11</i><p><b>Прихожанин</b><span>Зайти в церковь</span></p></div>
-      <div><i>12</i><p><b>Исследователь</b><span>Побывать у охотника, на мосту и на кладбище</span></p></div>
-      <div><i>13</i><p><b>Богатей</b><span>Накопить 500 ₽</span></p></div>
-      <div><i>14</i><p><b>Кладоискатель</b><span>Найти все тайники в доме</span></p></div>
-      <div><i>15</i><p><b>Пережил хардкор</b><span>Пережить ночь на сложности «Хардкор»</span></p></div>
-      <div><i>16</i><p><b>Следопыт</b><span>Собрать на доске все 12 улик</span></p></div>
-      <div><i>17</i><p><b>Свои люди</b><span>Найти записку-пасхалку</span></p></div>
-      <div><i>18</i><p><b>Хозяин</b><span>Выполнить все дела на день три раза</span></p></div>
-      <div><i>??</i><p><b>Никому не открыл</b><span>Пережить 50 ночей, ни разу не открыв дверь ночному гостю</span></p></div>
+    <div class="eyebrow"><span class="ru">Видео</span><span class="en">Video</span></div>
+    <h2><span class="ru">Смотри, как делается <em>игра</em></span><span class="en">See how the <em>game</em> is made</span></h2>
+    <p class="lead"><span class="ru">Ролики из моего канала: что нового в игре и спасибо подписчикам.</span><span class="en">Videos from my channel: what’s new in the game and a thank-you to subscribers.</span></p>
+    <div class="vids">
+      <div class="vid"><video src="img/v_today.mp4" poster="img/v_today.jpg" controls playsinline preload="none"></video><h3><span class="ru">Что я сделал за день</span><span class="en">What I made in one day</span></h3><p class="muted"><span class="ru">10 ноября · 1:16</span><span class="en">November 10 · 1:16</span></p></div>
+      <div class="vid"><video src="img/v_1000.mp4" poster="img/v_1000.jpg" controls playsinline preload="none"></video><h3><span class="ru">Нас 1000</span><span class="en">We are 1000</span></h3><p class="muted"><span class="ru">11 ноября · 0:47</span><span class="en">November 11 · 0:47</span></p></div>
     </div>
   </div>
-</section>
-
-<section id="team">
+</section><section id="map">
   <div class="wrap">
-    <div class="eyebrow">Команда</div>
-    <h2>Кто делает <em>игру</em></h2>
+    <div class="eyebrow"><span class="ru">Карта</span><span class="en">Map</span></div>
+    <h2><span class="ru">Деревня <em>Новинка</em></span><span class="en"><em>Novinka</em> village</span></h2>
+    <p class="lead"><span class="ru">Нажми на красную точку на карте, чтобы посмотреть это место.</span><span class="en">Tap a red dot on the map to see the place.</span></p>
+    <div class="map" id="mapBox"><img src="img/map.jpg" alt="Карта деревни Новинка" loading="lazy"></div>
+    <div class="place" id="place"><img id="placeImg" src="img/s_home.jpg" alt=""><div><h3 id="placeName"></h3><p class="muted" id="placeText"></p></div></div>
+  </div>
+</section><section id="get">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ru">Скачать</span><span class="en">Download</span></div>
+    <h2><span class="ru">Забери кассету <em>себе</em></span><span class="en">Take the <em>tape</em> home</span></h2>
+    <p class="lead"><span class="ru">Файлы для скачивания появятся здесь совсем скоро. Следи за новостями в Telegram-канале игры.</span><span class="en">Download files will appear here very soon. Follow the news in the game’s Telegram channel.</span></p>
+    <div class="dlg">
+      <div class="card main"><span class="plat"><span class="ru">Windows · полная</span><span class="en">Windows · full</span></span><h3><span class="ru">Вся игра</span><span class="en">Full game</span></h3><p><span class="ru">Все три серии, деревня, ночи и мультиплеер.</span><span class="en">All three episodes, the village, the nights and multiplayer.</span></p><div class="soon"><span class="ru">Скоро</span><span class="en">Soon</span></div></div>
+      <div class="card"><span class="plat"><span class="ru">Windows · 1 акт</span><span class="en">Windows · act 1</span></span><h3><span class="ru">Первая серия</span><span class="en">Episode one</span></h3><p><span class="ru">Короткая версия: только история Раиса. Весит меньше.</span><span class="en">A short version: only Rais’s story. Smaller download.</span></p><div class="soon"><span class="ru">Скоро</span><span class="en">Soon</span></div></div>
+      <div class="card"><span class="plat">Android</span><h3><span class="ru">Для телефона</span><span class="en">For phones</span></h3><p><span class="ru">Полная игра с сенсорным управлением и подсказками к кнопкам.</span><span class="en">The full game with touch controls and button hints.</span></p><div class="soon"><span class="ru">Скоро</span><span class="en">Soon</span></div></div>
+      <div class="card"><span class="plat"><span class="ru">Android · старые</span><span class="en">Android · older</span></span><h3><span class="ru">Для старых телефонов</span><span class="en">For older phones</span></h3><p><span class="ru">Облегчённая графика для слабых и старых телефонов.</span><span class="en">Lighter graphics for weak and older phones.</span></p><div class="soon"><span class="ru">Скоро</span><span class="en">Soon</span></div></div>
+    </div>
+    <div class="req" id="req">
+      <div><h3><span class="ru">Компьютер</span><span class="en">Computer</span></h3><table>
+        <tr><td><span class="ru">Система</span><span class="en">System</span></td><td><span class="ru">Windows 10 или 11, 64 бита</span><span class="en">Windows 10 or 11, 64-bit</span></td></tr>
+        <tr><td><span class="ru">Видеокарта</span><span class="en">Graphics</span></td><td><span class="ru">С поддержкой OpenGL 3.3</span><span class="en">OpenGL 3.3 support</span></td></tr>
+        <tr><td><span class="ru">Память</span><span class="en">Memory</span></td><td><span class="ru">4 ГБ</span><span class="en">4 GB</span></td></tr>
+        <tr><td><span class="ru">Место</span><span class="en">Storage</span></td><td><span class="ru">Около 200 МБ</span><span class="en">About 200 MB</span></td></tr>
+        <tr><td><span class="ru">Управление</span><span class="en">Controls</span></td><td><span class="ru">Клавиатура и мышь</span><span class="en">Keyboard and mouse</span></td></tr>
+      </table></div>
+      <div><h3><span class="ru">Телефон</span><span class="en">Phone</span></h3><table>
+        <tr><td><span class="ru">Система</span><span class="en">System</span></td><td><span class="ru">Android 5.0 и новее</span><span class="en">Android 5.0 or newer</span></td></tr>
+        <tr><td><span class="ru">Графика</span><span class="en">Graphics</span></td><td><span class="ru">Обычная версия: OpenGL ES 3.0. Старые телефоны: ES 2.0</span><span class="en">Regular: OpenGL ES 3.0. Older phones: ES 2.0</span></td></tr>
+        <tr><td><span class="ru">Место</span><span class="en">Storage</span></td><td><span class="ru">Около 150 МБ</span><span class="en">About 150 MB</span></td></tr>
+        <tr><td><span class="ru">Управление</span><span class="en">Controls</span></td><td><span class="ru">Сенсорное: джойстик и кнопки</span><span class="en">Touch: joystick and buttons</span></td></tr>
+        <tr><td>iPhone</td><td><span class="ru">Пока нет</span><span class="en">Not yet</span></td></tr>
+      </table></div>
+    </div>
+  </div>
+</section><section id="dlc">
+  <div class="wrap">
+    <div class="eyebrow">DLC</div>
+    <h2><span class="ru">Что было <em>раньше</em></span><span class="en">What happened <em>before</em></span></h2>
+    <div class="dlc">
+      <div class="im"><img src="img/dlc_lab.jpg" alt="Лаборатория" loading="lazy"></div>
+      <div class="tx">
+        <span class="pill"><span class="ru">В разработке</span><span class="en">In development</span></span>
+        <div class="yr">1986</div>
+        <h3><span class="ru">Лаборатория № 26</span><span class="en">Laboratory № 26</span></h3>
+        <p class="muted"><span class="ru">Отдельная история о том, с чего всё началось. Советская лаборатория, секретный эксперимент и объект, которому дали имя «Ноябрь».</span><span class="en">A separate story about how it all began. A Soviet laboratory, a secret experiment and an object that was given the name “November”.</span></p>
+      </div>
+    </div>
+  </div>
+</section><section id="news">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ru">Обновления</span><span class="en">Updates</span></div>
+    <h2><span class="ru">Дневник <em>разработки</em></span><span class="en">Development <em>diary</em></span></h2>
+    <p class="lead"><span class="ru">Игру делает один человек, и обновления выходят часто.</span><span class="en">One person makes the game, and updates come out often.</span></p>
+    <ol class="tl"><li><time>11.11.2026</time><h3><span class="ru">Нас 1000</span><span class="en">We are 1000</span></h3><ul><li><span class="ru">На канале игры уже тысяча подписчиков</span><span class="en">The game’s channel reached a thousand subscribers</span></li><li><span class="ru">Вышло видео-благодарность</span><span class="en">A thank-you video came out</span></li><li><span class="ru">Открылся сайт игры</span><span class="en">The game’s website opened</span></li></ul></li><li><time>10.11.2026</time><h3><span class="ru">Новый сюжет и большой дом</span><span class="en">New story and a bigger house</span></h3><ul><li><span class="ru">Все три серии переделаны по новому сценарию</span><span class="en">All three episodes were remade from a new script</span></li><li><span class="ru">Новые персонажи: Михаил, сотрудник полиции, Серёга в полный рост</span><span class="en">New characters: Mikhail, a police officer, full-height Seryoga</span></li><li><span class="ru">Дом Петровича стал в три раза больше</span><span class="en">Petrovich’s house became three times bigger</span></li><li><span class="ru">Новый последний день пролога: дядь Саша у магазина</span><span class="en">A new last day of the prologue: uncle Sasha at the shop</span></li><li><span class="ru">Ники тестеров на кладбище</span><span class="en">Testers’ nicknames in the cemetery</span></li><li><span class="ru">Новый значок игры</span><span class="en">A new game icon</span></li><li><span class="ru">На телефоне: подсказки к кнопкам, консоль и езда на машине</span><span class="en">On phones: button hints, console and driving</span></li></ul></li><li><time>07.11.2026</time><h3><span class="ru">Мультиплеер</span><span class="en">Multiplayer</span></h3><ul><li><span class="ru">Можно играть вдвоём: Петрович и Серёга</span><span class="en">Two players: Petrovich and Seryoga</span></li></ul></li><li><time>03.11.2026</time><h3><span class="ru">Версия для Android</span><span class="en">Android version</span></h3><ul><li><span class="ru">Игра вышла на телефоны</span><span class="en">The game came to phones</span></li><li><span class="ru">Отдельная версия для старых телефонов</span><span class="en">A separate build for older phones</span></li></ul></li><li><time>29.10.2026</time><h3><span class="ru">Telegram-канал игры</span><span class="en">Game Telegram channel</span></h3><ul><li><span class="ru">Открылся официальный канал, туда выходят новости и видео</span><span class="en">The official channel opened with news and videos</span></li></ul></li></ol>
+  </div>
+</section><section id="ach">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ru">Достижения</span><span class="en">Achievements</span></div>
+    <h2><span class="ru">Сможешь собрать <em>все?</em></span><span class="en">Can you get them <em>all?</em></span></h2>
+    <div class="ach"><div><i>01</i><p><b><span class="ru">Первая ночь</span><span class="en">First night</span></b><span><span class="ru">Пережить первую ночь</span><span class="en">Survive the first night</span></span></p></div><div><i>02</i><p><b><span class="ru">Три ночи</span><span class="en">Three nights</span></b><span><span class="ru">Пережить три ночи</span><span class="en">Survive three nights</span></span></p></div><div><i>03</i><p><b><span class="ru">Фотограф</span><span class="en">Photographer</span></b><span><span class="ru">Сделать 5 снимков фотоаппаратом</span><span class="en">Take 5 photos with the camera</span></span></p></div><div><i>04</i><p><b><span class="ru">Рыбак</span><span class="en">Fisherman</span></b><span><span class="ru">Посидеть с Серёгой у пруда</span><span class="en">Sit with Seryoga at the pond</span></span></p></div><div><i>05</i><p><b><span class="ru">Помощник</span><span class="en">Helper</span></b><span><span class="ru">Выполнить подработку у соседей</span><span class="en">Do a side job for the neighbours</span></span></p></div><div><i>06</i><p><b><span class="ru">Трудяга</span><span class="en">Hard worker</span></b><span><span class="ru">Выполнить 5 подработок</span><span class="en">Do 5 side jobs</span></span></p></div><div><i>07</i><p><b><span class="ru">Под кроватью</span><span class="en">Under the bed</span></b><span><span class="ru">Спрятаться и дождаться, пока монстр уйдёт</span><span class="en">Hide and wait until the monster leaves</span></span></p></div><div><i>08</i><p><b><span class="ru">Тише воды</span><span class="en">Quiet as a mouse</span></b><span><span class="ru">Пережить встречу с белым медведем</span><span class="en">Survive meeting the white bear</span></span></p></div><div><i>09</i><p><b><span class="ru">Свет вернулся</span><span class="en">Lights on</span></b><span><span class="ru">Починить генератор</span><span class="en">Fix the generator</span></span></p></div><div><i>10</i><p><b><span class="ru">Любопытный</span><span class="en">Curious</span></b><span><span class="ru">Включить телевизор</span><span class="en">Turn on the TV</span></span></p></div><div><i>11</i><p><b><span class="ru">Прихожанин</span><span class="en">Parishioner</span></b><span><span class="ru">Зайти в церковь</span><span class="en">Enter the church</span></span></p></div><div><i>12</i><p><b><span class="ru">Исследователь</span><span class="en">Explorer</span></b><span><span class="ru">Побывать у охотника, на мосту и на кладбище</span><span class="en">Visit the hunter, the bridge and the cemetery</span></span></p></div><div><i>13</i><p><b><span class="ru">Богатей</span><span class="en">Rich</span></b><span><span class="ru">Накопить 500 ₽</span><span class="en">Save up 500 ₽</span></span></p></div><div><i>14</i><p><b><span class="ru">Кладоискатель</span><span class="en">Treasure hunter</span></b><span><span class="ru">Найти все тайники в доме</span><span class="en">Find all the stashes in the house</span></span></p></div><div><i>15</i><p><b><span class="ru">Пережил хардкор</span><span class="en">Hardcore survivor</span></b><span><span class="ru">Пережить ночь на сложности «Хардкор»</span><span class="en">Survive a night on Hardcore</span></span></p></div><div><i>16</i><p><b><span class="ru">Следопыт</span><span class="en">Tracker</span></b><span><span class="ru">Собрать на доске все 12 улик</span><span class="en">Pin all 12 clues on the board</span></span></p></div><div><i>17</i><p><b><span class="ru">Свои люди</span><span class="en">Insider</span></b><span><span class="ru">Найти записку-пасхалку</span><span class="en">Find the easter-egg note</span></span></p></div><div><i>18</i><p><b><span class="ru">Хозяин</span><span class="en">Master of the house</span></b><span><span class="ru">Выполнить все дела на день три раза</span><span class="en">Finish all daily chores three times</span></span></p></div><div><i>??</i><p><b><span class="ru">Никому не открыл</span><span class="en">Opened to no one</span></b><span><span class="ru">Пережить 50 ночей, ни разу не открыв дверь ночному гостю</span><span class="en">Survive 50 nights without opening the door to a night guest</span></span></p></div></div>
+  </div>
+</section><section id="team">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ru">Команда</span><span class="en">Team</span></div>
+    <h2><span class="ru">Кто делает <em>игру</em></span><span class="en">Who makes the <em>game</em></span></h2>
     <div class="team">
-      <div class="card"><div class="ava">W</div><div><span class="plat">Разработчик</span><h3>W1ntrane</h3><p>Придумывает и делает игру: код на C++, деревня, ночи, видео для канала.</p></div></div>
-      <div class="card"><div class="ava alt">П</div><div><span class="plat">Сценарий</span><h3>petrovich_gandon1337</h3><p>Игра вдохновлена его сериалом. У сериала вышел приквел.</p></div></div>
+      <div class="card"><div class="ava">W</div><div><span class="plat"><span class="ru">Разработчик</span><span class="en">Developer</span></span><h3>W1ntrane</h3><p><span class="ru">Придумывает и делает игру: код на C++, деревня, ночи, видео для канала.</span><span class="en">Designs and builds the game: C++ code, the village, the nights and the channel videos.</span></p></div></div>
+      <div class="card"><div class="ava alt">П</div><div><span class="plat"><span class="ru">Сценарий</span><span class="en">Script</span></span><h3>petrovich_gandon1337</h3><p><span class="ru">Игра вдохновлена его сериалом. У сериала вышел приквел.</span><span class="en">The game is inspired by his series. The series has a prequel.</span></p></div></div>
     </div>
-    <h3 style="margin-top:44px">Тестеры</h3>
-    <p class="muted" style="margin:0">Находят баги раньше всех. Их ники навсегда остались на кладбище в игре.</p>
-    <div class="testers">
-      <div><div class="stone">R.I.P</div><b>Муха</b><span>тестер</span></div>
-      <div><div class="stone">R.I.P</div><b>петрович гандон</b><span>тестер</span></div>
-      <div><div class="stone">R.I.P</div><b>тамамкин нигодяй</b><span>тестер</span></div>
-      <div><div class="stone">R.I.P</div><b>ELектрический лобзик</b><span>тестер</span></div>
-      <div><div class="stone">R.I.P</div><b>Normik228988</b><span>тестер</span></div>
-    </div>
+    <h3 style="margin-top:44px"><span class="ru">Тестеры</span><span class="en">Testers</span></h3>
+    <p class="muted" style="margin:0"><span class="ru">Находят баги раньше всех.</span><span class="en">They find bugs before anyone else.</span></p>
+    <div class="testers"><div><div class="ava sm">М</div><b>Муха</b></div><div><div class="ava sm">П</div><b>петрович гандон</b></div><div><div class="ava sm">Т</div><b>тамамкин нигодяй</b></div><div><div class="ava sm">E</div><b>ELектрический лобзик</b></div><div><div class="ava sm">N</div><b>Normik228988</b></div></div>
   </div>
-</section>
-
-<section id="faq">
+</section><section id="faq">
   <div class="wrap">
-    <div class="eyebrow">Вопросы</div>
-    <h2>Частые <em>вопросы</em></h2>
-    <div class="faq">
-      <details><summary>Где скачать игру?</summary><p>Файлы скоро появятся на этом сайте в разделе «Скачать». Пока новости и сборки выходят в Telegram-канале игры.</p></details>
-      <details><summary>Как установить на Android?</summary><p>Скачай файл .apk и открой его. Телефон спросит, можно ли ставить приложения из этого источника: разреши. Новую версию ставь прямо поверх старой, сохранения останутся.</p></details>
-      <details><summary>Какую версию выбрать для телефона?</summary><p>Сначала попробуй обычную. Если игра не запускается или показывает чёрный экран, скачай версию для старых телефонов.</p></details>
-      <details><summary>Windows пишет, что «защитила компьютер». Что делать?</summary><p>Так бывает с играми от небольших разработчиков. Нажми «Подробнее», а потом «Выполнить в любом случае».</p></details>
-      <details><summary>Есть ли игра на iPhone?</summary><p>Пока нет. Игра работает на Windows и Android.</p></details>
-      <details><summary>Можно ли играть вдвоём?</summary><p>Да. Один игрок создаёт игру и играет за Петровича, второй подключается и играет за Серёгу.</p></details>
-      <details><summary>Как включить титры через консоль?</summary><p>Поставь в настройках сложность «Практика». На компьютере нажми F1 и напиши credits. На телефоне нажми зелёную кнопку «КОНС» и выбери «credits».</p></details>
-      <details><summary>Нашёл баг. Куда писать?</summary><p>Пиши в комментарии к видео или в Telegram-канал игры. Каждое сообщение читается.</p></details>
-    </div>
+    <div class="eyebrow"><span class="ru">Вопросы</span><span class="en">FAQ</span></div>
+    <h2><span class="ru">Частые <em>вопросы</em></span><span class="en">Frequently asked <em>questions</em></span></h2>
+    <div class="faq"><details><summary><span class="ru">Где скачать игру?</span><span class="en">Where can I download the game?</span></summary><p><span class="ru">Файлы скоро появятся на этом сайте в разделе «Скачать». Пока новости и сборки выходят в Telegram-канале игры.</span><span class="en">Files will soon appear in the Download section of this site. For now, news and builds come out in the game’s Telegram channel.</span></p></details><details><summary><span class="ru">Как установить на Android?</span><span class="en">How do I install it on Android?</span></summary><p><span class="ru">Скачай файл .apk и открой его. Телефон спросит, можно ли ставить приложения из этого источника: разреши. Новую версию ставь прямо поверх старой, сохранения останутся.</span><span class="en">Download the .apk file and open it. Your phone will ask whether to allow installs from this source: allow it. Install new versions right over the old one, your saves stay.</span></p></details><details><summary><span class="ru">Какую версию выбрать для телефона?</span><span class="en">Which phone version should I choose?</span></summary><p><span class="ru">Сначала попробуй обычную. Если игра не запускается или показывает чёрный экран, скачай версию для старых телефонов.</span><span class="en">Try the regular one first. If the game doesn’t start or shows a black screen, download the version for older phones.</span></p></details><details><summary><span class="ru">Windows пишет, что «защитила компьютер». Что делать?</span><span class="en">Windows says it “protected your PC”. What now?</span></summary><p><span class="ru">Так бывает с играми от небольших разработчиков. Нажми «Подробнее», а потом «Выполнить в любом случае».</span><span class="en">This happens with games from small developers. Click “More info”, then “Run anyway”.</span></p></details><details><summary><span class="ru">Есть ли игра на iPhone?</span><span class="en">Is there an iPhone version?</span></summary><p><span class="ru">Пока нет. Игра работает на Windows и Android.</span><span class="en">Not yet. The game runs on Windows and Android.</span></p></details><details><summary><span class="ru">Можно ли играть вдвоём?</span><span class="en">Can two people play?</span></summary><p><span class="ru">Да. Один игрок создаёт игру и играет за Петровича, второй подключается и играет за Серёгу.</span><span class="en">Yes. One player hosts and plays as Petrovich, the other joins and plays as Seryoga.</span></p></details><details><summary><span class="ru">Как включить титры через консоль?</span><span class="en">How do I open the credits from the console?</span></summary><p><span class="ru">Поставь в настройках сложность «Практика». На компьютере нажми F1 и напиши credits. На телефоне нажми зелёную кнопку «КОНС» и выбери «credits».</span><span class="en">Set the difficulty to “Practice”. On a computer press F1 and type credits. On a phone tap the green “КОНС” button and choose “credits”.</span></p></details><details><summary><span class="ru">Нашёл баг. Куда писать?</span><span class="en">I found a bug. Where do I report it?</span></summary><p><span class="ru">Пиши в комментарии к видео или в Telegram-канал игры. Каждое сообщение читается.</span><span class="en">Write in the video comments or in the game’s Telegram channel. Every message gets read.</span></p></details><details><summary><span class="ru">Это официальная игра Батек Официал?</span><span class="en">Is this an official Batek Official game?</span></summary><p><span class="ru">Нет. Это фанатский проект, он не связан с Батек Официал и сделан не ради заработка.</span><span class="en">No. This is a fan project. It is not affiliated with Batek Official and is not made for money.</span></p></details></div>
   </div>
-</section>
-</main>
-
-<footer>
+</section></main><footer>
   <div class="wrap">
-    <span>НОЯБРЬ 2026 · разработчик W1ntrane · по мотивам сериала petrovich_gandon1337</span>
-    <button class="eye" id="eye" aria-label="Что-то в темноте">не нажимай сюда три раза</button>
+    <span><span class="ru">НОЯБРЬ 2026 · разработчик W1ntrane · фанатский проект по мотивам сериала petrovich_gandon1337</span><span class="en">NOYABR 2026 · developer W1ntrane · fan project inspired by the series by petrovich_gandon1337</span></span>
+    <button class="eye" id="eye" aria-label="Что-то в темноте"><span class="ru">не нажимай сюда три раза</span><span class="en">don’t click here three times</span></button>
   </div>
 </footer>
-
-<div class="lb" id="lb" hidden><img id="lbimg" alt="Кадр крупно"><button class="btn" id="lbx" aria-label="Закрыть">✕ Закрыть</button></div>
+<div class="snd"><button class="tog" id="sndBtn" aria-pressed="false"><span class="ru">Звук: выкл</span><span class="en">Sound: off</span></button></div>
+<button class="rew" id="rew" aria-label="Наверх"><svg viewBox="0 0 60 34" aria-hidden="true"><rect x="1" y="1" width="58" height="32" rx="3" fill="#0d0a0b" stroke="#e0262b"/><rect x="10" y="8" width="40" height="14" rx="7" fill="#251c1e"/><g class="reel"><circle cx="18" cy="15" r="5" fill="none" stroke="#efe6e2" stroke-width="2"/><path d="M18 10v10M13 15h10" stroke="#efe6e2" stroke-width="1.5"/></g><g class="reel"><circle cx="42" cy="15" r="5" fill="none" stroke="#efe6e2" stroke-width="2"/><path d="M42 10v10M37 15h10" stroke="#efe6e2" stroke-width="1.5"/></g><rect x="20" y="26" width="20" height="4" fill="#e0262b"/></svg><span><span class="ru">НАВЕРХ</span><span class="en">TOP</span></span></button>
+<audio id="amb" src="img/amb.mp3" loop preload="none"></audio>
+<div class="lb" id="lb" hidden><img id="lbimg" alt="Кадр крупно"><button class="btn" id="lbx" aria-label="Закрыть">✕</button></div>
 <div class="flash" id="flash"></div>
 <div class="peek" id="peek" aria-hidden="true"><img src="img/peek_bear.png" alt=""></div>
-<div class="whisper" id="whisper" aria-hidden="true">Я ТЕБЯ ВИЖУ</div>
-
+<div class="whisper" id="whisper" aria-hidden="true"><span class="ru">Я ТЕБЯ ВИЖУ</span><span class="en">I SEE YOU</span></div>
+<div class="eyes" id="eyes" aria-hidden="true"></div>
+<div class="boot" aria-hidden="true"><small>PLAY ▶</small><div>НОЯБРЬ 2026</div><em>SP 00:00:00</em></div>
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -543,8 +562,128 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   };
   document.getElementById('eye').addEventListener('click', () => { clicks++; if (clicks >= 3) { clicks = 0; scare(); } });
   addEventListener('keydown', e => { if (e.key.length !== 1) return; typed = (typed + e.key.toLowerCase()).slice(-6); if (typed === 'ноябрь') scare(); });
+  const $ = (id) => document.getElementById(id);
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  // язык
+  let lang = store.get('nov_lang') || 'ru';
+  const L = (ru, en) => lang === 'en' ? en : ru;
+  const setLang = (l) => { lang = l; document.documentElement.lang = l; store.set('nov_lang', l); renderQuiz(); renderPlace(); peepText(); sndLabel(); };
+  $('langBtn').addEventListener('click', () => setLang(lang === 'ru' ? 'en' : 'ru'));
+  // без помех
+  const fxBtn = $('fxBtn');
+  const setFx = (off) => { document.body.classList.toggle('nofx', off); fxBtn.setAttribute('aria-pressed', off); store.set('nov_nofx', off ? '1' : '0'); };
+  fxBtn.addEventListener('click', () => setFx(!document.body.classList.contains('nofx')));
+  if (store.get('nov_nofx') === '1') setFx(true);
+  // звук
+  const amb = $('amb'), sndBtn = $('sndBtn');
+  const sndLabel = () => { const on = !amb.paused; sndBtn.innerHTML = on ? L('Звук: вкл', 'Sound: on') : L('Звук: выкл', 'Sound: off'); sndBtn.setAttribute('aria-pressed', on); };
+  sndBtn.addEventListener('click', () => { if (amb.paused) { amb.volume = .5; amb.play().then(sndLabel).catch(sndLabel); } else { amb.pause(); sndLabel(); } });
+  // до полуночи
+  const mid = $('mid');
+  const tickMid = () => { const n = new Date(), m = new Date(n); m.setHours(24, 0, 0, 0); const s = Math.floor((m - n) / 1000); mid.textContent = [s / 3600, (s / 60) % 60, s % 60].map(x => String(Math.floor(x)).padStart(2, '0')).join(':'); };
+  tickMid(); setInterval(tickMid, 1000);
+  // глитч разделов
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !document.body.classList.contains('nofx')) { e.target.classList.remove('gl'); void e.target.offsetWidth; e.target.classList.add('gl'); } }), { threshold: .18 });
+    document.querySelectorAll('main section').forEach(s => io.observe(s));
+  }
+  // кассета наверх
+  const rew = $('rew');
+  addEventListener('scroll', () => rew.classList.toggle('on', scrollY > 700), { passive: true });
+  rew.addEventListener('click', () => { rew.classList.add('spin'); scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => rew.classList.remove('spin'), 1200); });
+  // фонарик у героев
+  const grid = $('cast-grid');
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    grid.classList.add('lit');
+    grid.querySelectorAll('.pic').forEach(p => {
+      p.addEventListener('mousemove', e => { const r = p.getBoundingClientRect(); p.style.setProperty('--bx', (e.clientX - r.left) + 'px'); p.style.setProperty('--by', (e.clientY - r.top) + 'px'); });
+      p.addEventListener('mouseleave', () => p.style.setProperty('--by', '-400px'));
+    });
+  }
+  // медведь: 5 секунд бездействия у карточки — мигает страшным
+  const bear = $('bearCard'); let bearVis = false, last = Date.now(), bearT = Date.now();
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { bearVis = es[0].isIntersecting && es[0].intersectionRatio > .5; }, { threshold: [0, .5, 1] }).observe(bear);
+  setInterval(() => { if (!bearVis) bearT = Date.now(); if (bearVis && Date.now() - Math.max(last, bearT) > 5000) { bear.classList.add('boo'); setTimeout(() => bear.classList.remove('boo'), 1000); bearT = Date.now() - 1500; } }, 400);
+  // глаза в темноте после 30 секунд
+  const eyes = $('eyes'); let eyesOn = false;
+  const spawnEyes = () => { eyes.innerHTML = ''; for (let i = 0; i < 6; i++) { const im = new Image(); im.src = 'img/eye.png'; im.alt = ''; im.style.left = (8 + Math.random() * 76) + '%'; im.style.top = (10 + Math.random() * 72) + '%'; im.style.width = (70 + Math.random() * 90) + 'px'; im.style.animationDelay = (Math.random() * 5) + 's'; im.style.transitionDelay = (1 + i * .9) + 's'; eyes.appendChild(im); } requestAnimationFrame(() => eyes.classList.add('on')); eyesOn = true; };
+  const wake = () => { last = Date.now(); if (eyesOn) { eyesOn = false; eyes.classList.remove('on'); setTimeout(() => { if (!eyesOn) eyes.innerHTML = ''; }, 600); } };
+  ['mousemove', 'keydown', 'scroll', 'touchstart', 'click', 'wheel'].forEach(ev => addEventListener(ev, wake, { passive: true }));
+  setInterval(() => { if (!eyesOn && Date.now() - last > 30000 && !document.hidden) spawnEyes(); }, 1000);
+  // глазок
+  const guests = [
+    { img: 'g_h0.jpg', n: ['Катя', 'Katya'], h: [['«Петрович, ты батарейки забыл на кассе. Занесла.»', '“Petrovich, you left the batteries at the till. I brought them.”'], ['В руке пакет из «Шестёрочки», изо рта идёт пар.', 'A shop bag in her hand, her breath steams.']], m: [['«Петрович, открой. Магазин закрыт, мне некуда идти.»', '“Petrovich, open up. The shop is closed, I have nowhere to go.”'], ['Пара от дыхания нет, а на улице мороз.', 'No steam from her breath, and it’s freezing outside.']] },
+    { img: 'g_h1.jpg', n: ['Иван', 'Ivan'], h: [['«Петрович, у тебя калитка нараспашку. Я закрыл.»', '“Petrovich, your gate was wide open. I closed it.”'], ['Переминается с ноги на ногу и моргает от холода.', 'He shifts from foot to foot and blinks in the cold.']], m: [['«Иван я. Иван. Открой, Иван пришёл.»', '“I’m Ivan. Ivan. Open up, Ivan is here.”'], ['Не моргает уже минуту.', 'He hasn’t blinked for a minute.']] },
+    { img: 'g_h2.jpg', n: ['Нина', 'Nina'], h: [['«Витенька, пирожков напекла, ещё горячие.»', '“Vitya dear, I baked some pies, still hot.”'], ['От корзинки идёт пар.', 'Steam rises from the basket.']], m: [['«Витенька, пирожков напекла… Из леса шла.»', '“Vitya dear, I baked some pies… I came from the forest.”'], ['Ноги мокрые до колен, а дождя не было.', 'Her legs are wet to the knees, but it hasn’t rained.']] },
+    { img: 'g_h3.jpg', n: ['Коля', 'Kolya'], h: [['«Петрович, свет у всей улицы погас. У тебя есть?»', '“Petrovich, the whole street lost power. Do you have it?”'], ['Фонарик светит прямо в глазок.', 'His flashlight shines right into the peephole.']], m: [['«Петрович, свет у всей улицы погас. У тебя есть?»', '“Petrovich, the whole street lost power. Do you have it?”'], ['Фонарик в руке выключен, а лицо видно.', 'The flashlight in his hand is off, yet his face is lit.']] },
+    { img: 'g_h4.jpg', n: ['Валерий', 'Valery'], h: [['«Сосед, соль есть? Закончилась.»', '“Neighbour, got any salt? I ran out.”'], ['В руке пустая солонка.', 'An empty salt shaker in his hand.']], m: [['«Сосед. Сосед. Соль есть? Сосед.»', '“Neighbour. Neighbour. Got salt? Neighbour.”'], ['Тень от него смотрит в другую сторону.', 'His shadow faces the other way.']] }
+  ];
+  let order = [], round = -1, pts = 0, monster = false, phase = 'idle', lastRes = null;
+  const hole = $('hole'), gImg = $('guestImg'), dark = $('holeDark'), say = $('say'), tell = $('tell'), ver = $('verdict'), sc = $('score'), kb = $('knockBtn'), ob = $('openBtn'), cb = $('keepBtn');
+  const peepText = () => {
+    if (phase === 'idle') { say.textContent = L('Нажми «Стук», чтобы начать ночь.', 'Press “Knock” to start the night.'); tell.textContent = ''; ver.textContent = ''; sc.textContent = ''; return; }
+    const g = guests[order[round]], set = monster ? g.m : g.h, li = lang === 'en' ? 1 : 0;
+    say.textContent = g.n[li] + ': ' + set[0][li]; tell.textContent = set[1][li];
+    sc.textContent = L('Гость ', 'Guest ') + (round + 1) + ' / 5 · ' + L('верно: ', 'correct: ') + pts;
+    if (lastRes !== null) { ver.className = 'verdict ' + (lastRes.ok ? 'ok' : 'bad'); ver.textContent = lastRes.ok ? (lastRes.m ? L('Правильно. Это был не он.', 'Right. That wasn’t him.') : L('Правильно. Свой человек.', 'Right. A real neighbour.')) : (lastRes.m ? L('Ты открыл медведю.', 'You opened the door to the bear.') : L('Это был настоящий сосед. Он обиделся.', 'That was the real neighbour. He’s offended.')); } else ver.textContent = '';
+    if (phase === 'end') { sc.textContent = L('Ночь прошла. Верно: ', 'The night is over. Correct: ') + pts + ' / 5'; kb.innerHTML = L('Ещё ночь', 'Another night'); }
+  };
+  kb.addEventListener('click', () => {
+    if (phase === 'idle' || phase === 'end') { order = [0, 1, 2, 3, 4].sort(() => Math.random() - .5); round = -1; pts = 0; kb.innerHTML = L('Стук', 'Knock'); }
+    if (phase === 'ask') return;
+    round++; monster = Math.random() < .5; phase = 'ask'; lastRes = null;
+    hole.classList.remove('knock'); void hole.offsetWidth; hole.classList.add('knock');
+    gImg.hidden = true; dark.hidden = false;
+    setTimeout(() => { gImg.src = 'img/' + guests[order[round]].img; gImg.alt = guests[order[round]].n[0]; gImg.hidden = false; dark.hidden = true; peepText(); ob.disabled = cb.disabled = false; kb.disabled = true; }, 700);
+    say.textContent = L('Тук. Тук. Тук.', 'Knock. Knock. Knock.'); tell.textContent = ''; ver.textContent = '';
+  });
+  const answer = (open) => {
+    if (phase !== 'ask') return;
+    const ok = open !== monster; if (ok) pts++;
+    lastRes = { ok, m: monster }; ob.disabled = cb.disabled = true; kb.disabled = false;
+    phase = round >= 4 ? 'end' : 'wait';
+    if (open && monster) { fl.classList.add('on'); setTimeout(() => fl.classList.remove('on'), 500); }
+    peepText();
+  };
+  ob.addEventListener('click', () => answer(true)); cb.addEventListener('click', () => answer(false));
+  // тест
+  const who = { dad: ['Петрович', 'Petrovich', 'c_dad.png', 'Ты держишь всё под контролем, знаешь всех вокруг и первым замечаешь, что что-то не так.', 'You keep everything under control, know everyone around and are the first to notice that something is wrong.'], mom: ['Лена', 'Lena', 'c_mom.png', 'Ты не веришь в сказки и готова сама идти и требовать, пока все остальные ждут.', 'You don’t believe in fairy tales and go demand answers yourself while everyone else waits.'], vadim: ['Вадим', 'Vadim', 'c_vadim.png', 'Ты смелый и любопытный. Иногда слишком.', 'You are brave and curious. Sometimes too much.'], ser: ['Серёга', 'Seryoga', 'c_serega.png', 'Ты спокойный и надёжный, тебе бы на рыбалку, а не вот это всё.', 'You are calm and reliable — you’d rather go fishing than deal with all this.'], bear: ['Белый медведь', 'The white bear', 'c_bear.png', 'Ты появляешься ночью и знаешь, кто не спит. Интересно…', 'You appear at night and know who isn’t sleeping. Interesting…'] };
+  const qs = [
+    [['Ночью кто-то стучит в дверь. Ты…', 'Someone knocks at night. You…'], [['Смотрю в глазок и задаю вопрос', 'Look through the peephole and ask a question', 'dad'], ['Звоню в полицию', 'Call the police', 'mom'], ['Открываю, мне интересно', 'Open it, I’m curious', 'vadim'], ['Сплю дальше', 'Keep sleeping', 'ser'], ['Это я стучу', 'It’s me knocking', 'bear']]],
+    [['Твоё любимое место в Новинке', 'Your favourite place in Novinka'], [['Свой дом', 'My own house', 'dad'], ['Дежурная часть', 'The police station', 'mom'], ['Лес за полем', 'The forest past the field', 'vadim'], ['Пруд', 'The pond', 'ser'], ['Темнота', 'The darkness', 'bear']]],
+    [['Что возьмёшь с собой ночью?', 'What do you take at night?'], [['Фонарь и запасные батарейки', 'A lamp and spare batteries', 'dad'], ['Телефон', 'My phone', 'mom'], ['Фонарик с Озона', 'A cheap online-store flashlight', 'vadim'], ['Удочку', 'A fishing rod', 'ser'], ['Ничего, я вижу в темноте', 'Nothing, I see in the dark', 'bear']]],
+    [['Друг говорит про медведя из ноября. Ты…', 'A friend talks about the bear from November. You…'], [['Прошу его не ходить в лес', 'Ask him not to go into the forest', 'dad'], ['Злюсь: хватит сказок', 'Get angry: enough fairy tales', 'mom'], ['Смеюсь и иду проверить', 'Laugh and go check', 'vadim'], ['Говорю, что это чушь', 'Say it’s nonsense', 'ser'], ['Молчу и улыбаюсь', 'Stay silent and smile', 'bear']]],
+    [['Какое время суток твоё?', 'Your time of day?'], [['Утро, дел много', 'Morning, lots to do', 'dad'], ['День', 'Daytime', 'mom'], ['Вечер', 'Evening', 'vadim'], ['Раннее утро на рыбалке', 'Early morning fishing', 'ser'], ['Полночь', 'Midnight', 'bear']]]
+  ];
+  const qb = $('quizBox'); let qi = 0, tally = {}, qres = null;
+  const renderQuiz = () => {
+    const li = lang === 'en' ? 1 : 0;
+    if (qres) { const w = who[qres]; qb.innerHTML = '<div class="res"><img src="img/' + w[2] + '" alt="' + w[li] + '"><div><div class="eyebrow">' + L('Ты', 'You are') + '</div><h3 style="font-size:34px;margin:4px 0 10px">' + w[li] + '</h3><p class="muted">' + w[3 + li] + '</p><button class="btn" id="qAgain">' + L('Пройти ещё раз', 'Take it again') + '</button></div></div>'; $('qAgain').onclick = () => { qi = 0; tally = {}; qres = null; renderQuiz(); }; return; }
+    const q = qs[qi];
+    qb.innerHTML = '<div class="bar"><i style="width:' + (qi * 20) + '%"></i></div><p class="muted" style="font-family:var(--mono);font-size:13px;margin:12px 0 0">' + L('Вопрос ', 'Question ') + (qi + 1) + ' / 5</p><p class="q">' + q[0][li] + '</p><div class="opts">' + q[1].map((o, k) => '<button data-k="' + k + '">' + o[li] + '</button>').join('') + '</div>';
+    qb.querySelectorAll('.opts button').forEach(b => b.onclick = () => { const r = q[1][+b.dataset.k][2]; tally[r] = (tally[r] || 0) + 1; qi++; if (qi >= qs.length) { qres = Object.keys(tally).sort((a, c) => tally[c] - tally[a])[0]; } renderQuiz(); });
+  };
+  // карта
+  const places = [
+    ['Кладбище', 'Cemetery', 14.7, 23.9, 's_cemetery.jpg', 'Старое кладбище на краю деревни. Ночью сюда лучше не ходить.', 'The old cemetery at the edge of the village. Better not to come here at night.'],
+    ['Поле', 'Field', 40.6, 27.6, 's_field.jpg', 'Большое поле между деревней и лесом.', 'A big field between the village and the forest.'],
+    ['Наш дом', 'Our house', 30.1, 44.3, 's_home.jpg', 'Дом Петровича и Лены. Здесь ты переживаешь ночи.', 'Petrovich and Lena’s house. This is where you survive the nights.'],
+    ['Доска объявлений', 'Notice board', 42.2, 47, 'm_board.jpg', 'Сюда вешают фото пропавших. После каждой серии их всё больше.', 'Photos of the missing go here. After each episode there are more of them.'],
+    ['Дом Серёги', 'Seryoga’s house', 45.7, 44.5, 's_street.jpg', 'Здесь живут Серёга и Вадим.', 'Seryoga and Vadim live here.'],
+    ['Дежурная часть', 'Police station', 56.1, 44, 'm_police.jpg', 'Отдел полиции, куда приходят Лена и Петрович.', 'The police station where Lena and Petrovich come.'],
+    ['Охотничий домик', 'Hunter’s lodge', 80, 37.5, 'm_hunter.jpg', 'Домик охотника на краю леса.', 'The hunter’s lodge at the edge of the forest.'],
+    ['Поляна', 'Clearing', 85.7, 50.4, 's_forest.jpg', 'Поляна в лесу.', 'A clearing in the forest.'],
+    ['Магазин', 'Shop', 25.8, 57.5, 's_shop.jpg', '«Шестёрочка»: хлеб, батарейки и все новости деревни.', 'The corner shop: bread, batteries and all the village news.'],
+    ['Храм', 'Church', 39.1, 58.1, 'm_church.jpg', 'Деревенский храм.', 'The village church.'],
+    ['Пруд', 'Pond', 67.8, 58.7, 'm_pond.jpg', 'Пруд, куда Серёга ходит с удочкой.', 'The pond where Seryoga goes fishing.'],
+    ['Мост', 'Bridge', 44.8, 81.2, 'm_bridge.jpg', 'Мост на выезде из Новинки.', 'The bridge on the way out of Novinka.']
+  ];
+  const mapBox = $('mapBox'); let pi = 2;
+  places.forEach((p, i) => { const b = document.createElement('button'); b.className = 'pin'; b.style.left = p[2] + '%'; b.style.top = p[3] + '%'; b.setAttribute('aria-label', p[0]); b.onclick = () => { pi = i; renderPlace(); }; mapBox.appendChild(b); });
+  const renderPlace = () => { const p = places[pi], li = lang === 'en' ? 1 : 0; $('placeImg').src = 'img/' + p[4]; $('placeImg').alt = p[li]; $('placeName').textContent = p[li]; $('placeText').textContent = p[5 + li]; mapBox.querySelectorAll('.pin').forEach((b, k) => { b.classList.toggle('on', k === pi); b.setAttribute('aria-label', places[k][li]); }); };
+  setLang(lang);
 })();
-</script>
 
+</script>
 </body>
 </html>
